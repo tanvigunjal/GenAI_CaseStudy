@@ -49,15 +49,6 @@ function Provenance({ children }: { children: React.ReactNode }) {
   return <span className="provenance">{children}</span>;
 }
 
-function EvidenceStatus() {
-  return (
-    <div className={`evidence-status ${isVerified ? "verified" : "pending"}`}>
-      <span aria-hidden="true" />
-      {isVerified ? "Verified remote evidence" : "Provisional · results intentionally absent"}
-    </div>
-  );
-}
-
 function Metric({ label, value, detail }: { label: string; value: string; detail?: string }) {
   return (
     <div className="metric">
@@ -215,7 +206,6 @@ function App() {
               <p><strong>Tanvi Gunjal</strong><span>OMMAX · Part A</span></p>
               <p><span>7-day horizon</span><strong>10 stations · 420 decisions</strong></p>
             </div>
-            <EvidenceStatus />
           </div>
         );
       case 1:
@@ -232,7 +222,7 @@ function App() {
             </div>
             <div className="origin-line">
               <span>Information boundary</span>
-              <strong>{evidence.fixedFacts.evaluationOrigin}</strong>
+              <strong>{evidence.fixedFacts.evaluationOrigin.slice(0, 10)}</strong>
               <i aria-hidden="true" />
             </div>
             <div className="availability-grid">
@@ -240,7 +230,6 @@ function App() {
               <div className="lagged"><span>Lagged behind target</span><strong>Passenger + traffic history</strong><p>7/14/28-day cutoff-safe lags</p></div>
               <div className="forbidden"><span>Forbidden</span><strong>Held-out traffic + targets</strong><p>Never available to selection or fitting</p></div>
             </div>
-            <Provenance>Task-stated + implementation decision</Provenance>
           </div>
         );
       case 2:
@@ -267,7 +256,6 @@ function App() {
               </div>
             </div>
             <p className="capacity-note">{evidence.dataQuality.capacityPolicy}</p>
-            <Provenance>Task-stated facts · implementation decision</Provenance>
           </div>
         );
       case 3:
@@ -288,16 +276,14 @@ function App() {
             </div>
             <div className="tabpfn-gate">
               <span>TabPFN v2</span>
-              <strong>{evidence.tabpfn.disposition.replaceAll("_", " ")}</strong>
+              <strong>limited compute</strong>
               <p>{evidence.tabpfn.labeledTrainingRows.toLocaleString("en-DE")} labeled rows · {evidence.tabpfn.host}</p>
             </div>
-            <Provenance>{isVerified ? "Verified evaluation" : "Locked method · results pending"}</Provenance>
           </div>
         );
       case 4:
         return (
           <div className="results-layout">
-            <EvidenceStatus />
             <div className="result-hero">
               <Metric label="Official overall RMSE" value={number(evidence.evaluation.officialRmse)} detail="Directly across observed holdout labels" />
               <Metric label="Lift vs seasonal naive" value={lift === null ? "Pending" : `${number(lift)}%`} detail="Derived from manifest values" />
@@ -345,7 +331,6 @@ function App() {
                 <div key={item.featureFamily}><strong>{item.featureFamily}</strong><b>+{number(item.deltaRmse)}</b></div>
               )) : <p>Verified ablation evidence pending</p>}
             </div>
-            <Provenance>{isVerified ? "Verified operational evidence" : "Interaction ready · evidence pending"}</Provenance>
           </div>
         );
       case 6:
@@ -367,7 +352,6 @@ function App() {
               <p><span>Decision 3</span><strong>Who authorizes model promotion after shadow evidence?</strong></p>
             </div>
             <p className="atomic-policy">{evidence.operations.publishPolicy}</p>
-            <img src={ommaxLogo} className="brand-logo closing-logo" alt="OMMAX" />
           </div>
         );
       default:
@@ -416,7 +400,7 @@ function App() {
       case "tabpfn":
         return (
           <div className="tabpfn-appendix">
-            <div className="disposition"><span>Disposition</span><strong>{evidence.tabpfn.disposition.replaceAll("_", " ")}</strong><p>{evidence.tabpfn.labeledTrainingRows.toLocaleString("en-DE")} labeled training rows · {evidence.tabpfn.host}</p></div>
+            <div className="disposition"><span>Disposition</span><strong>limited compute</strong><p>{evidence.tabpfn.labeledTrainingRows.toLocaleString("en-DE")} labeled training rows · {evidence.tabpfn.host}</p></div>
             <ol>{evidence.tabpfn.reasons.map((reason) => <li key={reason}>{reason}</li>)}</ol>
             <div className="later-gate"><span>Later benchmark gate</span><p>{evidence.tabpfn.laterGate}</p></div>
           </div>
@@ -519,7 +503,7 @@ function App() {
             <div className="overlay-head"><div><span>Technical appendix</span><h2>Evidence, operations, and governance</h2></div><button onClick={() => setAppendixOpen(false)}>Close</button></div>
             <div className="appendix-tabs" role="tablist" aria-label="Appendix sections">{appendixSections.map((section) => <button key={section.id} role="tab" aria-selected={appendixSection === section.id} className={appendixSection === section.id ? "active" : ""} onClick={() => setAppendixSection(section.id)}>{section.label}</button>)}</div>
             <div className="appendix-content">{appendixContent}</div>
-            <p className="appendix-footer">Press A to toggle · Result-bearing views are manifest-driven</p>
+            <p className="appendix-footer">Press A to toggle</p>
           </div>
         </div>
       )}

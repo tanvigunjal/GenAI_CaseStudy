@@ -212,7 +212,6 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .decision-asks span { color: var(--neon); font-size: .65cqw; font-weight: 700; text-transform: uppercase; }
 .decision-asks strong { font-size: .93cqw; line-height: 1.25; }
 .atomic-policy { grid-column: 1 / -1; align-self: end; margin: 0; border-left: .5cqw solid var(--neon); padding-left: 1cqw; font-size: .78cqw; font-weight: 700; }
-.closing-logo { position: absolute; right: 0; bottom: -.1cqw; width: 10cqw; height: 4.1cqw; }
 
 /* Overlays */
 .overlay { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 2.3vw; background: rgba(0,2,44,.82); backdrop-filter: blur(10px); }

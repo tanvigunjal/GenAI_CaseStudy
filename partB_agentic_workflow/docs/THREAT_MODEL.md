@@ -2,7 +2,7 @@
 
 ## Scope and security objective
 
-This document covers the local Task B vertical slice. It uses synthetic data, a fixture mailbox, deterministic replay models, and a local REST ERP sandbox. It is not a production certification.
+This document covers the local Task B vertical slice, which runs on synthetic data with a fixture mailbox, deterministic replay models, and a local REST ERP sandbox. It's not a production certification.
 
 The primary security objective is simple: untrusted message content must never be able to authorize an ERP write, access unrelated customer data, suppress an audit record, or create more than one order for one mailbox message.
 

@@ -2,9 +2,9 @@
 
 ## Promotion posture
 
-The implemented system is a local, synthetic-data vertical slice. It demonstrates control flow and failure behavior; it does not claim production readiness, measured ROI, universal language coverage, or legal compliance.
+The implemented system is a local, synthetic-data vertical slice. It demonstrates control flow and failure behavior, but doesn't claim production readiness, measured ROI, universal language coverage, or legal compliance.
 
-The proposed promotion sequence is:
+The proposed promotion sequence:
 
 1. Replay plus shadow validation in CI.
 2. Synthetic live-model shadow checks when credentials and provider settings are explicitly supplied.
@@ -12,7 +12,7 @@ The proposed promotion sequence is:
 4. Reviewed auto-eligible shadow orders until the promotion gate is met.
 5. Limited auto-write only after an owner accepts the residual risk and kill-switch/runbook coverage.
 
-The statistical gate proposed in the plan is zero false auto-approvals across at least 299 reviewed auto-eligible shadow orders. This corresponds to a one-sided 95% “rule of three” upper bound below 1%. It is a promotion criterion, not evidence that the current prototype achieved that quality.
+The statistical gate proposed in the plan is zero false auto-approvals across at least 299 reviewed auto-eligible shadow orders, corresponding to a one-sided 95% “rule of three” upper bound below 1%. This is a promotion criterion, not evidence that the current prototype has already achieved that quality.
 
 ## Cloud-neutral topology
 
@@ -39,7 +39,7 @@ Those values are required deployment inputs; the case brief provides no facts fr
 
 ## Database and storage
 
-The prototype uses separate SQLite stores for workflow/audit state and the ERP sandbox. Production should retain the same logical separation while moving to managed transactional storage and controlled object storage.
+The prototype uses separate SQLite stores for workflow/audit state and the ERP sandbox. A production deployment should keep that same logical separation while moving to managed transactional storage and controlled object storage.
 
 Required production properties:
 

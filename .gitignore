@@ -1,0 +1,38 @@
+# Secrets
+.env
+
+# Runtime-generated pipeline output
+partB_agentic_workflow/workspace/
+partA_passenger_forecasting/data/raw/
+partA_passenger_forecasting/workspace/
+partA_passenger_forecasting/artifacts/runtime/
+partA_passenger_forecasting/tuning/
+partA_passenger_forecasting/.env
+partA_passenger_forecasting/presentation/dist/*
+!partA_passenger_forecasting/presentation/dist/ommax_part_a.html
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.coverage
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Presentation dependencies and browser artifacts
+node_modules/
+playwright-report/
+test-results/
+
+# Task A model/training scratch state
+*.db
+*.sqlite
+*.optuna
+
+# OS
+.DS_Store

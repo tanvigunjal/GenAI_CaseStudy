@@ -42,9 +42,9 @@ connection strings, tokens, or individual movement records.
 - fixed-baseline RMSE and relative champion lift; and
 - severity plus `none`, `alert`, `fallback`, or `block_publication` action.
 
-Initial freshness/performance thresholds must be approved from shadow-run evidence, not invented
-from the one holdout. Completeness is non-negotiable: normal publication requires 1.0. Any threshold
-change is versioned configuration and changes the evidence/config hash.
+Initial freshness and performance thresholds need to be approved from shadow-run evidence, not
+invented from the single holdout. Completeness is non-negotiable, normal publication requires 1.0,
+and any threshold change is versioned configuration that changes the evidence/config hash.
 
 ## Alert ownership and response
 
@@ -56,17 +56,17 @@ change is versioned configuration and changes the evidence/config hash.
 | RMSE, bias, station hotspot, baseline regression | ML owner + operations analyst | Review before next promotion; urgent escalation only if operationally material |
 | Storage/publication integrity | Platform owner | Prevent pointer update and safely retry after storage check |
 
-The exact organizational names and paging targets are deployment prerequisites, not fabricated in
-this submission.
+The exact organizational names and paging targets are deployment prerequisites, left for the
+deploying team to fill in rather than invented here.
 
 ## Promotion and rollback runbook
 
-Promotion requires a verified evidence manifest, passing code/tests/security checks, model-owner
-recommendation, operations review of station behavior, and explicit human approval. Record approver,
-timestamp, registry model version, feature schema, config hash, and evidence digest. Do not promote
-solely because one holdout metric improved.
+Promotion requires a verified evidence manifest, passing code/tests/security checks, a model-owner
+recommendation, operations review of station behavior, and explicit human approval, with the
+approver, timestamp, registry model version, feature schema, config hash, and evidence digest all
+recorded. A single improved holdout metric is never enough on its own.
 
-Rollback selects the previous approved immutable model/config pair, verifies its hashes, and runs a
-new full batch. Historical outputs are never deleted or rewritten. If the source contract is
-critical-failed, rollback does not bypass the publication block.
+Rollback selects the previous approved, immutable model/config pair, verifies its hashes, and runs a
+new full batch. Historical outputs are never deleted or rewritten, and if the source contract has
+critically failed, rollback doesn't bypass the publication block.
 

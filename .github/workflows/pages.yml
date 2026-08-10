@@ -1,0 +1,69 @@
+name: Deploy presentations to Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "partA_passenger_forecasting/presentation/dist/ommax_part_a.html"
+      - "partB_agentic_workflow/presentation/dist/ommax_part_b.html"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp partA_passenger_forecasting/presentation/dist/ommax_part_a.html _site/ommax_part_a.html
+          cp partB_agentic_workflow/presentation/dist/ommax_part_b.html _site/ommax_part_b.html
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>OMMAX Case Study</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 640px; margin: 4rem auto; padding: 0 1.5rem; color: #1a1a2e; }
+              h1 { font-size: 1.5rem; }
+              ul { padding-left: 1.2rem; }
+              li { margin: 0.6rem 0; }
+              a { color: #0a5fff; text-decoration: none; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>OMMAX Case Study — Presentations</h1>
+            <ul>
+              <li><a href="ommax_part_a.html">Part A — Passenger Forecasting</a></li>
+              <li><a href="ommax_part_b.html">Part B — Agentic Workflow</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

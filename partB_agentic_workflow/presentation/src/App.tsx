@@ -78,7 +78,6 @@ function Provenance({
   kind,
 }: {
   kind:
-    | "Task-stated"
     | "Demo-observed"
     | "Illustrative input"
     | "User input"
@@ -311,7 +310,6 @@ function App() {
             </div>
             <div className="scenario-contract">
               <strong>One trace</strong><strong>Explicit reasons</strong><strong>Observable terminal state</strong>
-              <Provenance kind="Task-stated" />
             </div>
           </div>
         );
@@ -340,7 +338,6 @@ function App() {
               <span>One email</span>
               <span>One order</span>
               <span>One trace</span>
-              <Provenance kind="Task-stated" />
             </div>
           </div>
         );
@@ -362,7 +359,7 @@ function App() {
               <p>Identity, catalog, price, stock, conflicts, value, mode</p>
               <span className="lane-limit">Only this lane can mint a write command</span>
             </div>
-            <div className="boundary-badge"><Provenance kind="Task-stated" /> 6 model turns · 8 tool calls · 5 search results max</div>
+            <div className="boundary-badge">6 model turns · 8 tool calls · 5 search results max</div>
           </div>
         );
       case 5:
@@ -384,7 +381,6 @@ function App() {
               <p>Customer search</p><p>Create</p><p>Update</p><p>Delete</p>
               <strong>No hidden state-changing path</strong>
             </div>
-            <div className="tools-source"><Provenance kind="Task-stated" /></div>
           </div>
         );
       case 6: {
@@ -400,7 +396,6 @@ function App() {
                 <span>Idempotency key</span>
                 <code>orders-eu/msg-042</code>
               </div>
-              <Provenance kind="Task-stated" />
             </div>
             <div className="trace-focus">
               <span className={`trace-kind kind-${event.kind}`}>{event.kind}</span>
@@ -475,7 +470,7 @@ function App() {
               <span>04</span><strong>Limit useful capability</strong><p>Sender-scoped reads · no mutation tools</p>
             </div>
             <div className="security-zero">
-              <strong>0</strong><span>ERP writes on blocked paths</span><Provenance kind="Task-stated" />
+              <strong>0</strong><span>ERP writes on blocked paths</span>
             </div>
           </div>
         );
@@ -491,7 +486,6 @@ function App() {
                 <span>{index}</span><h3>{finding}</h3><p>{implication}</p>
               </div>
             ))}
-            <div className="findings-badge"><Provenance kind="Task-stated" /></div>
           </div>
         );
       case 10:
@@ -511,7 +505,6 @@ function App() {
             ))}
             <div className="gate-callout">
               Proposed promotion gate: <strong>zero false auto-approvals</strong> in the selected shadow sample.
-              <Provenance kind="Task-stated" />
             </div>
           </div>
         );
@@ -623,7 +616,7 @@ function App() {
                 <output>{confidencePct}%</output>
                 <input type="range" min="80" max="99" step="1" value={confidencePct} onChange={(event) => setConfidencePct(event.target.valueAsNumber)} />
               </label>
-              <Provenance kind={targetRatePct === 1 && confidencePct === 95 ? "Task-stated" : "User input"} />
+              {!(targetRatePct === 1 && confidencePct === 95) && <Provenance kind="User input" />}
             </div>
             <div className="pilot-result" aria-live="polite">
               <span>Required reviewed auto-eligible orders</span>
@@ -736,7 +729,6 @@ function App() {
               ))}
             </div>
             <AppendixContent section={appendixSection} />
-            <p className="appendix-evidence">Evidence source commit · {evidence.sourceCommitSha.slice(0, 8)} · {evidence.mode} · <Provenance kind="Task-stated" /></p>
           </div>
         </div>
       )}
@@ -759,7 +751,6 @@ function AppendixContent({ section }: { section: AppendixSection }) {
         <div><h3>Identity + scope</h3><p>Verified webhook and sender verdicts</p><p>Exactly one resolved customer and order</p><p>English or German auto-write only</p></div>
         <div><h3>Commercial</h3><p>Known SKU · positive whole quantity</p><p>ERP EUR price authoritative</p><p>Quoted price within 2%</p><p>Aggregate stock sufficient</p></div>
         <div><h3>Control</h3><p>No unresolved ambiguity or conflict</p><p>Current catalog version</p><p>Value ≤ €50,000 demo cap</p><p>Sandbox auto mode · kill switch clear</p></div>
-        <Provenance kind="Task-stated" />
       </div>
     );
   }
@@ -790,7 +781,6 @@ function AppendixContent({ section }: { section: AppendixSection }) {
       <p>Capacity value = released hours × loaded labor cost. Cash benefit applies only the supplied realization share. Net annual benefit deducts variable AI and fixed operating cost. Payback adds half the stated ramp period to steady-state payback.</p>
       <h3>Pilot sample</h3>
       <p>For zero observed defects, n = ceil[log(1 − confidence) ÷ log(1 − target defect rate)]. The selected 1% / 95% gate requires 299 reviewed auto-eligible orders.</p>
-      <Provenance kind="Task-stated" />
     </div>
   );
 }

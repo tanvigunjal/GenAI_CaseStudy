@@ -1,0 +1,87 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ommax-order-workflow"
+version = "0.1.0"
+description = "Controlled, offline-first email-to-ERP workflow for the OMMAX case study"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.116,<1",
+  "httpx>=0.28,<1",
+  "openpyxl>=3.1,<4",
+  "pandas>=2.2,<4",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.9,<3",
+  "pypdf>=5.4,<7",
+  "python-pptx>=1.0,<2",
+  "tenacity>=9,<10",
+]
+
+[dependency-groups]
+dev = [
+  "mypy>=1.15,<2",
+  "pip-audit>=2.9,<3",
+  "pytest>=9.0.3,<10",
+  "pytest-cov>=6.1,<7",
+  "ruff>=0.11,<1",
+  "types-openpyxl>=3.1,<4",
+]
+live = [
+  "langchain-core>=0.3,<2",
+  "langchain-google-genai>=2.1,<5",
+]
+notebook = [
+  "ipykernel>=6.29,<8",
+  "matplotlib>=3.10,<4",
+  "nbconvert>=7.16,<8",
+  "nbformat>=5.10,<6",
+  "tabulate>=0.9,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/order_pipeline"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["src/order_pipeline"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+include = [
+  "src/order_pipeline/audit.py",
+  "src/order_pipeline/domain.py",
+  "src/order_pipeline/schemas.py",
+  "src/order_pipeline/state.py",
+  "src/order_pipeline/validation.py",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src"]
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["pandas.*", "pptx.*", "pypdf.*"]
+ignore_missing_imports = true

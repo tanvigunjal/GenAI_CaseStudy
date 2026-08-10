@@ -1,0 +1,170 @@
+{
+  "claimBoundary": "Synthetic local control-path evidence; no production accuracy, ROI, cost, or latency claim.",
+  "claims": {
+    "coreScenes": 14,
+    "promotionSampleFloor": 299,
+    "supportedAttachments": [
+      "PDF",
+      "PPTX",
+      "XLSX"
+    ],
+    "supportedLanguages": [
+      "English",
+      "German"
+    ]
+  },
+  "generatedAt": "2026-08-08T14:47:13.063045Z",
+  "mode": "deterministic replay / shadow by default",
+  "observations": {
+    "attachments": {
+      "PDF": {
+        "locators": [
+          {
+            "cell": null,
+            "page": 1,
+            "row": null,
+            "sheet": null,
+            "slide": null
+          }
+        ],
+        "outcome": "SHADOW_APPROVED",
+        "writeCount": 0
+      },
+      "PPTX": {
+        "locators": [
+          {
+            "cell": null,
+            "page": null,
+            "row": null,
+            "sheet": null,
+            "slide": 1
+          }
+        ],
+        "outcome": "SHADOW_APPROVED",
+        "writeCount": 0
+      },
+      "XLSX": {
+        "locators": [
+          {
+            "cell": "A1",
+            "page": null,
+            "row": 1,
+            "sheet": "Orders",
+            "slide": null
+          },
+          {
+            "cell": "B1",
+            "page": null,
+            "row": 1,
+            "sheet": "Orders",
+            "slide": null
+          },
+          {
+            "cell": "C1",
+            "page": null,
+            "row": 1,
+            "sheet": "Orders",
+            "slide": null
+          },
+          {
+            "cell": "A2",
+            "page": null,
+            "row": 2,
+            "sheet": "Orders",
+            "slide": null
+          },
+          {
+            "cell": "B2",
+            "page": null,
+            "row": 2,
+            "sheet": "Orders",
+            "slide": null
+          }
+        ],
+        "outcome": "SHADOW_APPROVED",
+        "writeCount": 0
+      }
+    },
+    "failures": {
+      "corrupt_pdf": {
+        "modelCalls": 0,
+        "outcome": "REVIEW_REQUIRED",
+        "reasonCodes": [
+          "WRONG_FILE_TYPE"
+        ],
+        "writeCount": 0
+      },
+      "injection": {
+        "modelCalls": 0,
+        "outcome": "SECURITY_REVIEW",
+        "reasonCodes": [
+          "DETERMINISTIC_INJECTION"
+        ],
+        "writeCount": 0
+      }
+    },
+    "humanReview": {
+      "correctionChanges": [
+        "ambiguities",
+        "lines"
+      ],
+      "states": [
+        "PENDING",
+        "CLAIMED",
+        "CORRECTED",
+        "REVALIDATED",
+        "WRITE_PENDING",
+        "ERP_CREATED",
+        "APPROVED"
+      ],
+      "validatedTotal": "1845.00",
+      "writeCount": 1
+    },
+    "isolatedAutoDuplicate": {
+      "auditEventCount": 16,
+      "auditVerified": true,
+      "outcomes": [
+        {
+          "deduplicated": false,
+          "outcome": "ERP_CREATED",
+          "reasonCodes": []
+        },
+        {
+          "deduplicated": true,
+          "outcome": "ERP_CREATED",
+          "reasonCodes": []
+        }
+      ],
+      "writeCount": 1
+    },
+    "shadow": {
+      "auditEventCount": 15,
+      "auditVerified": true,
+      "outcomes": [
+        {
+          "deduplicated": false,
+          "outcome": "SHADOW_APPROVED",
+          "reasonCodes": [
+            "SHADOW_MODE"
+          ]
+        }
+      ],
+      "writeCount": 0
+    }
+  },
+  "quality": {
+    "blockedPathWriteCount": 0,
+    "deterministicCoreBranchCoveragePercent": 91,
+    "testCount": 79,
+    "testStatus": "passed"
+  },
+  "schemaVersion": 1,
+  "source": "order_to_erp_agent.ipynb replay evidence export",
+  "sourceCommitSha": "49995f936ea2b6c929a4840232ac4cb1a2c2e6f8",
+  "status": "passed",
+  "toolAllowlist": [
+    "lookup_product",
+    "search_products",
+    "purchase_history"
+  ]
+}

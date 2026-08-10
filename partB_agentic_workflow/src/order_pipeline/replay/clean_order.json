@@ -1,0 +1,46 @@
+{
+  "version": "replay-v1",
+  "actions": [
+    {
+      "kind": "tools",
+      "tool_requests": [
+        {
+          "call_id": "catalog-1",
+          "name": "lookup_product",
+          "arguments": {"sku": "STL-BEAM-200"}
+        }
+      ]
+    },
+    {
+      "kind": "final",
+      "proposal": {
+        "detected_language": "en",
+        "lines": [
+          {
+            "description": "Steel I-Beam 200mm",
+            "candidate_sku": "STL-BEAM-200",
+            "quantity": 10,
+            "quoted_unit_price": 184.50,
+            "evidence": [
+              {
+                "field": "lines.0",
+                "source": {"kind": "body"},
+                "excerpt": "10 x STL-BEAM-200 at EUR 184.50"
+              }
+            ]
+          }
+        ],
+        "warnings": [],
+        "ambiguities": [],
+        "provenance": [
+          {
+            "field": "lines.0",
+            "source": {"kind": "body"},
+            "excerpt": "10 x STL-BEAM-200 at EUR 184.50"
+          }
+        ],
+        "model_confidence": 0.10
+      }
+    }
+  ]
+}

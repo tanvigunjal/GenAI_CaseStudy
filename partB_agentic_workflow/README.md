@@ -1,8 +1,8 @@
 # Controlled email-to-ERP workflow
 
-OMMAX case study, Part B. This branch hardens the original demo into a local, production-shaped vertical slice while keeping the model behind a deterministic authorization boundary.
+OMMAX case study, Part B. This is a locally runnable, production-shaped slice of an email-to-ERP pipeline, with the model kept behind a deterministic authorization boundary. It can propose actions, but it never gets to execute them on its own.
 
-The default run is offline, keyless, deterministic replay in shadow mode. An optional Gemini adapter is available only for synthetic-data shadow checks. Automatic writes are restricted to the local REST ERP sandbox.
+By default everything runs offline: no API keys, no network calls, just deterministic replay in shadow mode. An optional Gemini adapter is available for shadow checks against synthetic data, and even then, automatic writes are limited to a local REST ERP sandbox.
 
 ## Deliverables
 
@@ -13,59 +13,56 @@ The default run is offline, keyless, deterministic replay in shadow mode. An opt
 | `tests/` | Golden, adversarial, state, audit, attachment, REST, idempotency, and review controls |
 | `presentation/dist/ommax_part_b.html` | Self-contained 14-scene executive/technical presentation |
 | `presentation_evidence.json` | Sanitized evidence manifest generated from the replay run |
-| `TASK_B_IMPLEMENTATION_PLAN.md` | Locked implementation plan |
-| `BASELINE.md` | Original commit, inventory, and 31-test result |
 | `ARCHITECTURE.md` | Code-level control flow and trust boundaries |
 | `docs/THREAT_MODEL.md` | Threat/control/test mapping and residual risks |
 | `docs/OPERATIONS_AND_COMPLIANCE.md` | Deployment, monitoring, GDPR/EU, and runbook posture |
-| `docs/TRACEABILITY.md` | Brief-to-code/notebook/test/presentation map |
-| `docs/SUBMISSION_QA.md` | Final command matrix, evidence revision, and integrity checks |
 
-The source case-study PDF remains unchanged at repository root.
+
+The case-study PDF is included at the repository root.
 
 ## Setup
 
-Requirements: Python 3.12, `uv`, and Node.js/npm for the presentation.
+Requirements: Python 3.12, `uv`, and Node.js/npm (for the presentation).
 
 ```bash
 cd partB_agentic_workflow
 uv sync --locked --all-groups
 ```
 
-Replay/shadow starts without credentials or network access:
+Replay/shadow mode works out of the box, no credentials or network access needed:
 
 ```bash
 uv run python -c "from pathlib import Path; from order_pipeline.demo import run_demo_scenarios; print(run_demo_scenarios(Path('workspace/demo'), include_auto_example=True))"
 ```
 
-Runtime modes are explicit:
+Runtime behavior is controlled by a few environment variables:
 
-- `MODEL_MODE=replay` is the default and uses checked-in action transcripts.
-- `MODEL_MODE=live` requires `GOOGLE_API_KEY`, `GEMINI_EXTRACTION_MODEL`, and `GEMINI_SCREENING_MODEL`.
-- Live Gemini construction is restricted to `WRITE_MODE=shadow`.
-- `WRITE_MODE=auto` is accepted only for `RUNTIME_ENVIRONMENT=local_sandbox`.
-- `KILL_SWITCH=true` prevents writes regardless of a valid decision.
+- `MODEL_MODE=replay`: the default; uses checked-in action transcripts instead of calling a model.
+- `MODEL_MODE=live`: calls Gemini; requires `GOOGLE_API_KEY`, `GEMINI_EXTRACTION_MODEL`, and `GEMINI_SCREENING_MODEL`.
+- Live Gemini calls only run when `WRITE_MODE=shadow`.
+- `WRITE_MODE=auto` only takes effect when `RUNTIME_ENVIRONMENT=local_sandbox`.
+- `KILL_SWITCH=true` blocks all writes regardless of anything else that's set.
 
-See `.env.example`; do not commit `.env` or credentials.
+See `.env.example` for the full list. Keep `.env` and any real credentials out of version control.
 
 ## Notebook
 
-Execute the committed notebook without network access:
+Run the committed notebook with no network access:
 
 ```bash
 uv run jupyter nbconvert --execute --to notebook order_to_erp_agent.ipynb \
   --output /tmp/order_to_erp_agent.executed.ipynb
 ```
 
-The default notebook run demonstrates:
+The default run walks through:
 
 - English and German input.
-- Body, PDF, PPTX, and XLSX extraction with provenance.
-- Shadow approval, security block, parser failure, ambiguity/review, correction/revalidation.
-- One isolated local sandbox write and duplicate replay.
-- Stable trace, audit verification, and evidence export.
+- Extraction from email body, PDF, PPTX, and XLSX, with provenance tracked throughout.
+- Shadow approval, a security block, a parser failure, an ambiguous case routed to review, and a correction/revalidation cycle.
+- One write to the isolated local sandbox, plus a duplicate replay.
+- A stable trace, audit verification, and evidence export.
 
-The optional live section is disabled unless explicitly requested and remains synthetic-data, shadow-only.
+The live section is off unless explicitly enabled, and even then it only touches synthetic data in shadow mode.
 
 ## Python quality gates
 
@@ -77,7 +74,7 @@ uv run pytest
 uv run pip-audit
 ```
 
-The 90% branch-coverage gate applies to the deterministic authorization and persistence core: domain contracts, schemas, validation, state, and audit. Adapter and presentation-layer modules remain exercised by the full test suite but are not misrepresented as part of that deterministic-core metric. The original 31-test baseline is recorded separately because those tests targeted the removed demonstration APIs.
+The 90% branch-coverage target applies to the deterministic core: domain contracts, schemas, validation, state, and audit, since that's the part handling authorization and persistence.
 
 ## Presentation
 
@@ -90,8 +87,8 @@ npm run build
 npm run test:e2e
 ```
 
-The build produces exactly `dist/ommax_part_b.html`: one offline file with bundled React, CSS, font assets, evidence, presenter notes, overview, appendix, scenario tabs, trace scrubber, value calculator, and pilot-sample calculator.
+The build produces a single file, `dist/ommax_part_b.html`.
 
 ## Scope and claims
 
-This is a synthetic-data local prototype, not a real mailbox/ERP deployment. It deliberately excludes OCR, legacy Office formats, split orders/shipments, real customer data, model-triggered mutations, a production review UI, and production ROI/accuracy claims. Tested auto-write language scope is English and German; all other languages route to review.
+This is a local prototype built on synthetic data, not a live mailbox or ERP deployment. It does not include OCR, legacy Office formats, split orders/shipments, real customer data, model-triggered mutations, a production review UI, or production-grade ROI/accuracy figures. Auto-write is only tested for English and German input; everything else is routed to review.

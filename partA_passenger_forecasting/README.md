@@ -73,8 +73,7 @@ and pushed before execution. A versioned directory is created under
 `/home//ommax-task-a/runs/<source-sha>/`; code and the four raw CSVs are sent
 with non-destructive `rsync`, checksums are verified remotely, and a pinned
 user-local `uv` is used without modifying system Python. See
-[docs/OPERATIONS_AND_MONITORING.md](docs/OPERATIONS_AND_MONITORING.md) and
-[docs/SUBMISSION_QA.md](docs/SUBMISSION_QA.md) for the exact procedure.
+[docs/OPERATIONS_AND_MONITORING.md](docs/OPERATIONS_AND_MONITORING.md) for the exact procedure.
 
 Only the compact selected model and sanitized derived evidence return to Git.
 Raw data, credentials, tuning studies, caches, and mutable runtime workspaces are

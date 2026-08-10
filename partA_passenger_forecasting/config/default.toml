@@ -1,0 +1,13 @@
+raw_data_dir = "data/raw"
+output_dir = "workspace/local"
+timezone = "Europe/Berlin"
+log_level = "INFO"
+horizon_days = 7
+service_hours = [7, 8, 9, 10, 11, 12]
+schema_version = "1.0.0"
+max_rss_gib = 8.0
+max_tuning_seconds = 7200
+cpu_threads = 6
+seed = 20260808
+execution_target = "local"
+

@@ -1,0 +1,23 @@
+	Command being timed: "/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/tools/uv/uv run forecast backtest --config /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/config/hetzner_prod.toml --data-dir /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/data/raw --output-dir /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work"
+	User time (seconds): 9252.64
+	System time (seconds): 633.87
+	Percent of CPU this job got: 554%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 29:43.13
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1230272
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 8
+	Minor (reclaiming a frame) page faults: 37696958
+	Voluntary context switches: 2147370
+	Involuntary context switches: 120220500
+	Swaps: 0
+	File system inputs: 10160
+	File system outputs: 9792
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

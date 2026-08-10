@@ -1,0 +1,77 @@
+{"command": "backtest", "config_hash": "29fe462d72acc526a154415b00881baaba6dd59ad3d1cb74c34b9effa46c5596", "event": "command_started", "execution_target": "hetzner_prod", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T17:42:12.956894+00:00"}
+[I 2026-08-08 17:42:55,249] A new study created in memory with name: no-name-9d3e118c-6a17-4535-8565-a7e003fd0e3f
+[I 2026-08-08 17:47:13,672] A new study created in memory with name: no-name-2736e9a7-5a96-465a-8f1f-7e06399ca9f0
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/.venv/lib/python3.12/site-packages/sklearn/linear_model/_glm/glm.py:285: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result("lbfgs", opt_res)
+{"backtest": "/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work/backtest.json", "selection": "catboost_06", "status": "passed"}
+{"command": "backtest", "duration_seconds": 1781.647489, "event": "command_completed", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T18:11:54.604314+00:00"}

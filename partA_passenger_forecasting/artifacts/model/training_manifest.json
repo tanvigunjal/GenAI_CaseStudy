@@ -1,0 +1,19 @@
+{
+  "config_hash": "29fe462d72acc526a154415b00881baaba6dd59ad3d1cb74c34b9effa46c5596",
+  "family": "catboost",
+  "feature_schema_hash": "400edd0815670f0f8533b2f37676a7ee2cae7f26f4e28d5127c9252f30448fd0",
+  "feature_schema_sha256": "72f53393310a49344991de1ee7e3f02940144298d41837afb5ff68519b19342c",
+  "labeled_rows": 66858,
+  "mapping_sha256": "4efae08d32cd63fcfa844ab086e3bed78ce6a73ad963dd14ad36585ae9223713",
+  "model_sha256": "f3c7998026261a2e1726c7131e72a648f23038f537348645bc030b37f33009c8",
+  "parameters": {
+    "depth": 5,
+    "iterations": 1500,
+    "l2_leaf_reg": 1.6793251233547184,
+    "learning_rate": 0.09374714004673183,
+    "random_strength": 0.1609521360260011
+  },
+  "schema_version": "1.0.0",
+  "selected_candidate_id": "catboost_06",
+  "source_revision": "f5c5c65ed273231f11b4d931efbca08f27895fcc"
+}

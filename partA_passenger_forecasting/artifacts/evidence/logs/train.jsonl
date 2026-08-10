@@ -1,0 +1,3 @@
+{"command": "train", "config_hash": "29fe462d72acc526a154415b00881baaba6dd59ad3d1cb74c34b9effa46c5596", "event": "command_started", "execution_target": "hetzner_prod", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T18:11:56.690095+00:00"}
+{"status": "passed", "training_manifest": "/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work/model/training_manifest.json"}
+{"command": "train", "duration_seconds": 28.348236, "event": "command_completed", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T18:12:25.038254+00:00"}

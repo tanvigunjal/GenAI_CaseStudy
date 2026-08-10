@@ -1,0 +1,58 @@
+{
+  "audit": {
+    "capacity_exceedances": 394,
+    "date_count": 1129,
+    "null_targets": 465,
+    "null_test_targets": 3,
+    "passenger_rows": 67740,
+    "sensor_count": 5,
+    "station_count": 10,
+    "station_rows": 10,
+    "traffic_nulls": 0,
+    "traffic_rows": 135480,
+    "warnings": [
+      "394 known targets exceed descriptive station_capacity; rows retained",
+      "465 target labels are null"
+    ],
+    "weather_precipitation_nulls": 158,
+    "weather_rows": 27096,
+    "weather_temperature_nulls": 143
+  },
+  "schema_version": "1.0.0",
+  "source_snapshots": {
+    "station_metadata.csv": {
+      "digest": "f619def0c760d9b9d01b1614252a15ea22dc3db987cfac1227c34db78ab9ff93",
+      "row_count": 10,
+      "schema_version": "1.0.0",
+      "watermark": null
+    },
+    "timeseries_with_target.csv": {
+      "digest": "60693930f3de3415124c9334188eae51e34a0545f39098c3508463b5421f13b0",
+      "row_count": 67740,
+      "schema_version": "1.0.0",
+      "watermark": "2026-02-02T11:00:00+00:00"
+    },
+    "traffic_hourly.csv": {
+      "digest": "723ea8ccb6e2e886ee028771b3a1853f8f0f77a8b6afe76ac598d2bdf2fb830a",
+      "row_count": 135480,
+      "schema_version": "1.0.0",
+      "watermark": "2026-02-02T22:00:00+00:00"
+    },
+    "weather_hourly.csv": {
+      "digest": "1e34227dbc2b65f375e20d0ca19ac50a4ca65d24f9267dded015266edfa64698",
+      "row_count": 27096,
+      "schema_version": "1.0.0",
+      "watermark": "2026-02-02T22:00:00+00:00"
+    }
+  },
+  "split": {
+    "test_end": "2026-02-02",
+    "test_rows": 420,
+    "test_start": "2026-01-27",
+    "train_end": "2026-01-26",
+    "train_rows": 67320,
+    "train_start": "2023-01-01"
+  },
+  "station_sensor_mapping_sha256": "4efae08d32cd63fcfa844ab086e3bed78ce6a73ad963dd14ad36585ae9223713",
+  "status": "passed"
+}

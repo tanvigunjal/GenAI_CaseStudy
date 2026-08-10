@@ -1,0 +1,3359 @@
+{
+  "architecture": [
+    "ADLS Gen2",
+    "Hourly orchestration",
+    "Azure ML batch",
+    "Model registry",
+    "Versioned forecast outputs",
+    "Application Insights / Log Analytics"
+  ],
+  "artifacts": {
+    "configSha256": "8842eb2a33ceafeb89fd337292e6e8efedee552c1720510b4a12271957916f7e",
+    "dependencyLockSha256": "e27c8907d1d493b3dd0912bc235bc15d50a5416cee316516dc0fd64522febb89",
+    "featureSchemaSha256": "72f53393310a49344991de1ee7e3f02940144298d41837afb5ff68519b19342c",
+    "modelSha256": "f3c7998026261a2e1726c7131e72a648f23038f537348645bc030b37f33009c8",
+    "predictionsSha256": "25ab8b64f061b20d49ff42d2628f760c9eaca397537c144c7895040473332955"
+  },
+  "claimBoundary": "Model results and operational diagnostics are loaded from the verified remote evaluation and integrity manifests bound to the recorded source revision.",
+  "dataQuality": {
+    "capacityPolicy": "Station capacity is descriptive, not a clipping ceiling; observed counts can exceed it.",
+    "ingestionTimestampLimitation": "The supplied files contain event timestamps but no ingestion timestamps, so local evaluation assumes rows at or before the origin were available then.",
+    "mappingPolicy": "Stable coordinate-derived sensor IDs; each station maps to its nearest sensor; distance remains a model feature and a diagnostic.",
+    "nullTargets": 465,
+    "trafficMapping": [
+      {
+        "distanceKm": 0.1736981336198202,
+        "sensorId": "sensor_4c60042cf636",
+        "stationId": "1"
+      },
+      {
+        "distanceKm": 0.7485869037717178,
+        "sensorId": "sensor_6f277919bf88",
+        "stationId": "10"
+      },
+      {
+        "distanceKm": 0.1012892397289788,
+        "sensorId": "sensor_6f277919bf88",
+        "stationId": "2"
+      },
+      {
+        "distanceKm": 0.1775509425050521,
+        "sensorId": "sensor_424938c75e07",
+        "stationId": "3"
+      },
+      {
+        "distanceKm": 0.1718077115874487,
+        "sensorId": "sensor_36e2b4d13d6b",
+        "stationId": "4"
+      },
+      {
+        "distanceKm": 0.6536822242344269,
+        "sensorId": "sensor_424938c75e07",
+        "stationId": "5"
+      },
+      {
+        "distanceKm": 0.3479702868941713,
+        "sensorId": "sensor_4c60042cf636",
+        "stationId": "6"
+      },
+      {
+        "distanceKm": 0.3401877325616789,
+        "sensorId": "sensor_6f277919bf88",
+        "stationId": "7"
+      },
+      {
+        "distanceKm": 0.112940152263024,
+        "sensorId": "sensor_45bff658b2a6",
+        "stationId": "8"
+      },
+      {
+        "distanceKm": 3.4592287524577734,
+        "sensorId": "sensor_6f277919bf88",
+        "stationId": "9"
+      }
+    ]
+  },
+  "datasets": [
+    {
+      "columns": 7,
+      "name": "station_metadata.csv",
+      "rows": 10,
+      "sha256": "f619def0c760d9b9d01b1614252a15ea22dc3db987cfac1227c34db78ab9ff93"
+    },
+    {
+      "columns": 3,
+      "name": "timeseries_with_target.csv",
+      "rows": 67740,
+      "sha256": "60693930f3de3415124c9334188eae51e34a0545f39098c3508463b5421f13b0"
+    },
+    {
+      "columns": 4,
+      "name": "traffic_hourly.csv",
+      "rows": 135480,
+      "sha256": "723ea8ccb6e2e886ee028771b3a1853f8f0f77a8b6afe76ac598d2bdf2fb830a"
+    },
+    {
+      "columns": 3,
+      "name": "weather_hourly.csv",
+      "rows": 27096,
+      "sha256": "1e34227dbc2b65f375e20d0ca19ac50a4ca65d24f9267dded015266edfa64698"
+    }
+  ],
+  "evaluation": {
+    "ablations": [
+      {
+        "deltaRmse": 60.957298532746705,
+        "featureFamily": "calendar",
+        "rmseWithout": 308.75236255025914
+      },
+      {
+        "deltaRmse": 15.80961014771637,
+        "featureFamily": "station",
+        "rmseWithout": 263.6046741652288
+      },
+      {
+        "deltaRmse": -14.31998756344052,
+        "featureFamily": "passenger_history",
+        "rmseWithout": 233.4750764540719
+      },
+      {
+        "deltaRmse": 2.255389124865161,
+        "featureFamily": "weather",
+        "rmseWithout": 250.0504531423776
+      },
+      {
+        "deltaRmse": 6.930117024314029,
+        "featureFamily": "traffic",
+        "rmseWithout": 254.72518104182646
+      }
+    ],
+    "candidates": [
+      {
+        "artifactBytes": null,
+        "latencyMs": null,
+        "meanValidationRmse": null,
+        "model": "seasonal_naive",
+        "parameters": {
+          "fallback": "historical_median",
+          "lag_days": 7
+        },
+        "role": "fixed baseline",
+        "selected": false,
+        "worstStationRmse": null
+      },
+      {
+        "artifactBytes": null,
+        "latencyMs": null,
+        "meanValidationRmse": null,
+        "model": "historical_median",
+        "parameters": {
+          "grain": "station_weekday_hour"
+        },
+        "role": "fixed baseline",
+        "selected": false,
+        "worstStationRmse": null
+      },
+      {
+        "artifactBytes": 1972817,
+        "latencyMs": 4.6817343682050705,
+        "meanValidationRmse": 254.23283298543728,
+        "model": "lightgbm",
+        "parameters": {
+          "colsample_bytree": 0.826127359319196,
+          "learning_rate": 0.04936513814897326,
+          "max_depth": 7,
+          "min_child_samples": 76,
+          "n_estimators": 2000,
+          "num_leaves": 36,
+          "reg_lambda": 0.0012848072220288508,
+          "subsample": 0.9472611748975748
+        },
+        "role": "challenger",
+        "selected": false,
+        "worstStationRmse": 424.71921721844336
+      },
+      {
+        "artifactBytes": 531272,
+        "latencyMs": 10.124281669656435,
+        "meanValidationRmse": 247.79506401751243,
+        "model": "catboost",
+        "parameters": {
+          "depth": 5,
+          "iterations": 1500,
+          "l2_leaf_reg": 1.6793251233547184,
+          "learning_rate": 0.09374714004673183,
+          "random_strength": 0.1609521360260011
+        },
+        "role": "challenger",
+        "selected": true,
+        "worstStationRmse": 421.80910742730816
+      },
+      {
+        "artifactBytes": 12158,
+        "latencyMs": 11.277968374391397,
+        "meanValidationRmse": 364.33592488782847,
+        "model": "tweedie_glm",
+        "parameters": {
+          "alpha": 10.0
+        },
+        "role": "challenger",
+        "selected": false,
+        "worstStationRmse": 706.7217577349896
+      }
+    ],
+    "champion": "catboost",
+    "folds": [
+      {
+        "fold": 1,
+        "rmse": 261.31125927327076,
+        "scoreableRows": null,
+        "validationEnd": "2026-01-12",
+        "validationStart": "2026-01-06"
+      },
+      {
+        "fold": 2,
+        "rmse": 243.9705615990075,
+        "scoreableRows": null,
+        "validationEnd": "2026-01-19",
+        "validationStart": "2026-01-13"
+      },
+      {
+        "fold": 3,
+        "rmse": 238.10337118025902,
+        "scoreableRows": null,
+        "validationEnd": "2026-01-26",
+        "validationStart": "2026-01-20"
+      }
+    ],
+    "historicalMedianRmse": 282.7584596838471,
+    "officialRmse": 273.0886452876618,
+    "seasonalNaiveRmse": 343.4092440120121,
+    "stationMetrics": [
+      {
+        "bias": -34.55312063071798,
+        "rmse": 252.96836249223477,
+        "sampleCount": 41,
+        "series": [
+          {
+            "actual": 2173.0,
+            "forecast": 2024.4064482540061,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 1980.0,
+            "forecast": 2257.540414909637,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 1385.0,
+            "forecast": 1451.3537691998129,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 836.0,
+            "forecast": 1051.9853256093193,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 1047.0,
+            "forecast": 952.6443015882489,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 694.0,
+            "forecast": 892.9220095141825,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 3502.0,
+            "forecast": 3285.3622716779782,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 2923.0,
+            "forecast": 3007.503392461143,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 2166.0,
+            "forecast": 2041.409553860298,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": null,
+            "forecast": 1649.244960075985,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 885.0,
+            "forecast": 1401.9907546994923,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 1361.0,
+            "forecast": 1349.231740013963,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 4213.0,
+            "forecast": 4159.093996885571,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 3472.0,
+            "forecast": 3493.8884452723805,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 2468.0,
+            "forecast": 2643.481701864774,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 1847.0,
+            "forecast": 1992.5242564421878,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 1548.0,
+            "forecast": 1678.8621914561982,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 1756.0,
+            "forecast": 1360.2039895708779,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 3516.0,
+            "forecast": 3466.281317178797,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 2884.0,
+            "forecast": 3198.3264789118557,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 2690.0,
+            "forecast": 2325.5054025060595,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 2094.0,
+            "forecast": 1732.1900493375765,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 1312.0,
+            "forecast": 1550.2832638882048,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 1063.0,
+            "forecast": 1297.2526023015241,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 3897.0,
+            "forecast": 4132.114669446927,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 3548.0,
+            "forecast": 3240.946546085158,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 2282.0,
+            "forecast": 2035.6836319550048,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 1397.0,
+            "forecast": 1648.6759645766258,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 1400.0,
+            "forecast": 1498.3165827504795,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 1487.0,
+            "forecast": 1276.04273774798,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 3108.0,
+            "forecast": 2543.9048115756996,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 2158.0,
+            "forecast": 2165.4751124335608,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 2008.0,
+            "forecast": 1464.5809128044832,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 938.0,
+            "forecast": 1121.4487732755988,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 1088.0,
+            "forecast": 930.4734878875466,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 925.0,
+            "forecast": 924.2744930082597,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 3661.0,
+            "forecast": 3396.1526733975197,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 3426.0,
+            "forecast": 3140.7179802820774,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 2460.0,
+            "forecast": 2102.0943116564404,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 1853.0,
+            "forecast": 1580.7992980744996,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 1477.0,
+            "forecast": 1536.6793509836095,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 1157.0,
+            "forecast": 1315.6970387950041,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "1",
+        "stationLabel": "Muenchen Hauptbahnhof"
+      },
+      {
+        "bias": -0.35797946366100286,
+        "rmse": 40.800820949726806,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 357.0,
+            "forecast": 357.77835818413917,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 275.0,
+            "forecast": 357.42872319378625,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 223.0,
+            "forecast": 226.2894705244987,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 195.0,
+            "forecast": 239.9646100858372,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 208.0,
+            "forecast": 150.03635448157456,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 189.0,
+            "forecast": 172.92472833751276,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 433.0,
+            "forecast": 397.3624794367363,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 324.0,
+            "forecast": 384.0832279295398,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 235.0,
+            "forecast": 233.55949599585256,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 213.0,
+            "forecast": 210.04961996112456,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 280.0,
+            "forecast": 217.1309855610341,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 220.0,
+            "forecast": 208.99678532287976,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 416.0,
+            "forecast": 380.8052155370077,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 436.0,
+            "forecast": 385.4559265700342,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 233.0,
+            "forecast": 258.0714146108935,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 244.0,
+            "forecast": 211.92330259748405,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 199.0,
+            "forecast": 188.6594415338477,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 191.0,
+            "forecast": 193.169408429005,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 792.0,
+            "forecast": 734.3726202936502,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 685.0,
+            "forecast": 647.5607917190167,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 503.0,
+            "forecast": 439.8178230877726,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 340.0,
+            "forecast": 418.60067718781147,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 306.0,
+            "forecast": 376.12967737840836,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 379.0,
+            "forecast": 356.42907371985655,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 406.0,
+            "forecast": 378.59044828910316,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 376.0,
+            "forecast": 336.84113085125875,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 248.0,
+            "forecast": 252.14662134439845,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 163.0,
+            "forecast": 213.5611211774176,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 167.0,
+            "forecast": 189.40855289601063,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 113.0,
+            "forecast": 176.12726888098427,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 525.0,
+            "forecast": 456.7068322770099,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 415.0,
+            "forecast": 442.86137017768795,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 221.0,
+            "forecast": 288.78029505295353,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 256.0,
+            "forecast": 248.14600341817618,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 246.0,
+            "forecast": 232.86815519221636,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 239.0,
+            "forecast": 207.24848840995878,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 322.0,
+            "forecast": 350.043628076352,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 343.0,
+            "forecast": 336.8393479409003,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 216.0,
+            "forecast": 207.69648852771206,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 156.0,
+            "forecast": 171.05246183505892,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 149.0,
+            "forecast": 158.20069611845747,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 128.0,
+            "forecast": 156.24574038127776,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "2",
+        "stationLabel": "Marienplatz"
+      },
+      {
+        "bias": -31.474040653288597,
+        "rmse": 213.03800336278226,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 589.0,
+            "forecast": 667.2058944508658,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 848.0,
+            "forecast": 859.2073308470613,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 712.0,
+            "forecast": 735.6984114662635,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 585.0,
+            "forecast": 608.3797676016032,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 407.0,
+            "forecast": 443.22286931894564,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 342.0,
+            "forecast": 432.98979582621314,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 664.0,
+            "forecast": 784.2923252956375,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 962.0,
+            "forecast": 888.8109507877195,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 786.0,
+            "forecast": 818.2228811649387,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 636.0,
+            "forecast": 651.7657233409705,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 599.0,
+            "forecast": 527.516334594612,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 457.0,
+            "forecast": 495.5280853086226,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 793.0,
+            "forecast": 714.7987547311724,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 2159.0,
+            "forecast": 891.735916652733,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 719.0,
+            "forecast": 758.684595992968,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 528.0,
+            "forecast": 614.1091362942003,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 402.0,
+            "forecast": 486.0555667664979,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 512.0,
+            "forecast": 427.551282688313,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 900.0,
+            "forecast": 837.3963804875176,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 1015.0,
+            "forecast": 949.3225294662352,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 951.0,
+            "forecast": 838.2333795164406,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 636.0,
+            "forecast": 674.1586065640018,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 538.0,
+            "forecast": 557.8837942192584,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 417.0,
+            "forecast": 473.7050007582842,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 454.0,
+            "forecast": 525.9508882951515,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 642.0,
+            "forecast": 646.7440646765907,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 613.0,
+            "forecast": 572.3213316441141,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 397.0,
+            "forecast": 430.58080435223553,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 455.0,
+            "forecast": 377.13392822123683,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 328.0,
+            "forecast": 317.32710923385434,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 506.0,
+            "forecast": 639.0826467684948,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 745.0,
+            "forecast": 764.4181552024921,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 865.0,
+            "forecast": 677.6216843256789,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 280.0,
+            "forecast": 518.5242076211811,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 541.0,
+            "forecast": 392.48673615147504,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 471.0,
+            "forecast": 339.1801468990601,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 917.0,
+            "forecast": 826.0098893005354,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 1022.0,
+            "forecast": 1030.0412340822375,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 947.0,
+            "forecast": 869.9628936323317,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 786.0,
+            "forecast": 707.5360986394633,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 662.0,
+            "forecast": 590.0322209726943,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 412.0,
+            "forecast": 516.6609384019763,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "3",
+        "stationLabel": "Ostbahnhof"
+      },
+      {
+        "bias": -42.85556779813788,
+        "rmse": 189.93115019771648,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 1415.0,
+            "forecast": 1161.730508292826,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 1539.0,
+            "forecast": 1615.6990711023293,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 1484.0,
+            "forecast": 1373.2080266801086,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 978.0,
+            "forecast": 987.5752133768747,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 535.0,
+            "forecast": 670.0855455834212,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 770.0,
+            "forecast": 689.2350959827597,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 1085.0,
+            "forecast": 1318.9434136980824,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 2112.0,
+            "forecast": 1914.9720632239032,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 1561.0,
+            "forecast": 1540.1478863644888,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 969.0,
+            "forecast": 910.0697610433945,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 798.0,
+            "forecast": 805.6030641211648,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 581.0,
+            "forecast": 705.1155550909016,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 2056.0,
+            "forecast": 2110.1657687219804,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 3208.0,
+            "forecast": 2918.4814579385034,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 2753.0,
+            "forecast": 2438.142801732334,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 1447.0,
+            "forecast": 1412.764357035513,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 1251.0,
+            "forecast": 1086.596951335311,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 1022.0,
+            "forecast": 1050.6784063547516,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 2647.0,
+            "forecast": 2235.911276984568,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 3310.0,
+            "forecast": 3235.326555764641,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 2697.0,
+            "forecast": 2664.5666575451623,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 1430.0,
+            "forecast": 1661.8906375056508,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 1245.0,
+            "forecast": 1163.4588318581457,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 1221.0,
+            "forecast": 1279.434784075233,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 1571.0,
+            "forecast": 1198.9125134554452,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 1424.0,
+            "forecast": 1747.3501995457696,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 1579.0,
+            "forecast": 1316.2740222384723,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 1088.0,
+            "forecast": 766.1353171714645,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 729.0,
+            "forecast": 694.9854689872932,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 365.0,
+            "forecast": 668.1296430296524,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 1321.0,
+            "forecast": 1488.4090968491855,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 1845.0,
+            "forecast": 1961.0536907655544,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 1602.0,
+            "forecast": 1524.0608694353941,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 1416.0,
+            "forecast": 985.0602175546136,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 703.0,
+            "forecast": 758.7507649668114,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 649.0,
+            "forecast": 791.0662578675065,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 1311.0,
+            "forecast": 1265.026325026278,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 1959.0,
+            "forecast": 1743.1286217694728,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 1261.0,
+            "forecast": 1367.6492812615606,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 769.0,
+            "forecast": 793.187024566517,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 885.0,
+            "forecast": 763.9026864037139,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 625.0,
+            "forecast": 633.1804601714551,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "4",
+        "stationLabel": "Westbahnhof"
+      },
+      {
+        "bias": -37.09639214623216,
+        "rmse": 195.1429384441703,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 3035.0,
+            "forecast": 2657.4241659926674,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 2663.0,
+            "forecast": 2562.638843068016,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 2090.0,
+            "forecast": 2150.7631689162467,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 1862.0,
+            "forecast": 1702.582234633434,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 1529.0,
+            "forecast": 1430.8409086450024,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 1211.0,
+            "forecast": 1322.5008947966699,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 2004.0,
+            "forecast": 2027.8345547733343,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 2070.0,
+            "forecast": 2171.687628902391,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 1307.0,
+            "forecast": 1676.2366486536712,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 1293.0,
+            "forecast": 1479.3616021967948,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 1272.0,
+            "forecast": 1156.0719093306748,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 1256.0,
+            "forecast": 1080.541060858905,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 1577.0,
+            "forecast": 1810.9891270268156,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 1955.0,
+            "forecast": 1832.787099135151,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 1587.0,
+            "forecast": 1466.7394151039289,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 1164.0,
+            "forecast": 1199.9624744220803,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 1325.0,
+            "forecast": 1008.6461057079046,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 961.0,
+            "forecast": 990.3970861466389,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 2562.0,
+            "forecast": 2336.0575315804044,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 2187.0,
+            "forecast": 2268.6170883895356,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 2195.0,
+            "forecast": 1867.6240601451298,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 1726.0,
+            "forecast": 1575.174169334161,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 931.0,
+            "forecast": 1232.75759672812,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 1107.0,
+            "forecast": 1216.2945092860944,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 1165.0,
+            "forecast": 1538.6186433344506,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 1223.0,
+            "forecast": 1288.16509307049,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 1009.0,
+            "forecast": 1068.3385555137725,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 1074.0,
+            "forecast": 898.3222583738878,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 836.0,
+            "forecast": 730.3559888665652,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 755.0,
+            "forecast": 726.3466309907174,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 1095.0,
+            "forecast": 889.7629243289623,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 669.0,
+            "forecast": 898.0893727545881,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 799.0,
+            "forecast": 712.6398329660735,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 870.0,
+            "forecast": 572.4430537392248,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 783.0,
+            "forecast": 478.7748399324462,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 286.0,
+            "forecast": 459.52532970838513,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 2818.0,
+            "forecast": 2511.5961699225336,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 2740.0,
+            "forecast": 2495.427434952935,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 2143.0,
+            "forecast": 2016.5897668968933,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 1569.0,
+            "forecast": 1598.7587726826764,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 1360.0,
+            "forecast": 1472.281333753495,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 1368.0,
+            "forecast": 1292.3856442963806,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "5",
+        "stationLabel": "Sendlinger Tor"
+      },
+      {
+        "bias": 8.628733499713208,
+        "rmse": 633.0898912271268,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 2818.0,
+            "forecast": 2702.3159564551634,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 4267.0,
+            "forecast": 4621.735879265649,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 8698.0,
+            "forecast": 5387.4468578488,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 4789.0,
+            "forecast": 5136.692080005432,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 3217.0,
+            "forecast": 3257.6889232901203,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 2809.0,
+            "forecast": 2746.1051246578836,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 1572.0,
+            "forecast": 1805.0184254350602,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 3202.0,
+            "forecast": 2676.3457077034327,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 2733.0,
+            "forecast": 3154.3384145800346,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 2553.0,
+            "forecast": 2916.7069402967786,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 1824.0,
+            "forecast": 2203.5593999922594,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 1256.0,
+            "forecast": 1978.1972026505432,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 2008.0,
+            "forecast": 2150.7740031383937,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 4190.0,
+            "forecast": 3559.3331035246774,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 4496.0,
+            "forecast": 3929.999293582296,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 3843.0,
+            "forecast": 3914.1231780546655,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 2721.0,
+            "forecast": 2730.868205258204,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 1562.0,
+            "forecast": 1977.274102599571,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 1803.0,
+            "forecast": 2682.737852986088,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 4323.0,
+            "forecast": 4313.216870943203,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 5161.0,
+            "forecast": 6017.4510169549885,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 4742.0,
+            "forecast": 4459.470816236742,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 2919.0,
+            "forecast": 3270.7554074205377,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 2475.0,
+            "forecast": 2445.263264233356,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 1980.0,
+            "forecast": 1681.6863674362867,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 2385.0,
+            "forecast": 2720.0843330747,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 3140.0,
+            "forecast": 2953.2738641917203,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 2770.0,
+            "forecast": 2630.2804467129076,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 1767.0,
+            "forecast": 1882.9265746248243,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 1983.0,
+            "forecast": 1610.3786113636966,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 1158.0,
+            "forecast": 1139.4636192337605,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 1942.0,
+            "forecast": 1827.6960314705161,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 2556.0,
+            "forecast": 2212.42489130552,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 1795.0,
+            "forecast": 2160.0084620239295,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 1577.0,
+            "forecast": 1451.1814806979228,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 1173.0,
+            "forecast": 1092.8702376744527,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 1835.0,
+            "forecast": 2309.2339699284557,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 3239.0,
+            "forecast": 3480.726952681707,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 4184.0,
+            "forecast": 3760.9605866307356,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 3782.0,
+            "forecast": 3659.602603038055,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 2209.0,
+            "forecast": 2745.77427880924,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 1826.0,
+            "forecast": 2288.4154689756438,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "6",
+        "stationLabel": "Karlsplatz Stachus"
+      },
+      {
+        "bias": 2.245818854686052,
+        "rmse": 25.33497153010717,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 184.0,
+            "forecast": 194.0950896452598,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 254.0,
+            "forecast": 246.75348752270247,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 209.0,
+            "forecast": 203.3867366886161,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 149.0,
+            "forecast": 200.70311021116663,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 88.0,
+            "forecast": 111.71733112611673,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 132.0,
+            "forecast": 124.1059321274331,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 197.0,
+            "forecast": 213.74676060776846,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 310.0,
+            "forecast": 275.17185427586355,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 236.0,
+            "forecast": 216.68449150786842,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 165.0,
+            "forecast": 161.0735687245117,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 120.0,
+            "forecast": 141.7451031749713,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 155.0,
+            "forecast": 157.39040682332165,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 158.0,
+            "forecast": 181.98278814719424,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 231.0,
+            "forecast": 224.7125659991989,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 171.0,
+            "forecast": 183.65194517224154,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 99.0,
+            "forecast": 126.49386924071769,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 73.0,
+            "forecast": 96.13247549663129,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 113.0,
+            "forecast": 102.33954537707541,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 188.0,
+            "forecast": 201.40840505862843,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 246.0,
+            "forecast": 268.3487466337481,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 213.0,
+            "forecast": 205.37915624954599,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 97.0,
+            "forecast": 136.37389053409788,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 82.0,
+            "forecast": 125.31677865551524,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 109.0,
+            "forecast": 124.08353164927394,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 117.0,
+            "forecast": 99.25857726766276,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 176.0,
+            "forecast": 128.23179819828374,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 136.0,
+            "forecast": 111.0830453627243,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 98.0,
+            "forecast": 58.80511281588656,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 60.0,
+            "forecast": 54.5304854398687,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 78.0,
+            "forecast": 56.79054918274778,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 69.0,
+            "forecast": 97.72422399868401,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 164.0,
+            "forecast": 118.51895300171645,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 61.0,
+            "forecast": 105.55466033538687,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 77.0,
+            "forecast": 52.65902114461346,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 66.0,
+            "forecast": 44.59851262119105,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 59.0,
+            "forecast": 40.39685644093652,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 187.0,
+            "forecast": 231.56677503153855,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 318.0,
+            "forecast": 297.21849833197234,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 245.0,
+            "forecast": 243.02862770695128,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 167.0,
+            "forecast": 175.1788530402498,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 149.0,
+            "forecast": 140.5978528561684,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 129.0,
+            "forecast": 150.78441847076306,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "7",
+        "stationLabel": "Isartor"
+      },
+      {
+        "bias": 13.260449372968457,
+        "rmse": 63.72220421445734,
+        "sampleCount": 41,
+        "series": [
+          {
+            "actual": 390.0,
+            "forecast": 453.7008386988148,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 663.0,
+            "forecast": 570.8912849249793,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 561.0,
+            "forecast": 495.97731305871434,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 344.0,
+            "forecast": 396.2952695180138,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 300.0,
+            "forecast": 238.85147429068752,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 248.0,
+            "forecast": 226.49908646106473,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 500.0,
+            "forecast": 452.7768442279496,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 551.0,
+            "forecast": 547.1686169115447,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 564.0,
+            "forecast": 490.82269760731083,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 397.0,
+            "forecast": 360.7815458214743,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 257.0,
+            "forecast": 238.29215358583906,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 149.0,
+            "forecast": 233.94315926800368,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 687.0,
+            "forecast": 569.240967407055,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 684.0,
+            "forecast": 703.4654148124087,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 580.0,
+            "forecast": 638.5604385482293,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 476.0,
+            "forecast": 465.94342924700493,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 315.0,
+            "forecast": 312.8057616767776,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 315.0,
+            "forecast": 301.3923445508958,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 545.0,
+            "forecast": 618.5985700225542,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 719.0,
+            "forecast": 743.8980438967859,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 589.0,
+            "forecast": 686.4429790826666,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 486.0,
+            "forecast": 485.2407975292417,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 304.0,
+            "forecast": 375.4870372476594,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 250.0,
+            "forecast": 472.80305146570925,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": null,
+            "forecast": 420.23540450109954,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 523.0,
+            "forecast": 493.25573271737426,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 478.0,
+            "forecast": 463.2644382643281,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 277.0,
+            "forecast": 335.9870996491554,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 241.0,
+            "forecast": 210.97364846276446,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 214.0,
+            "forecast": 192.20952685507837,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 407.0,
+            "forecast": 475.6462758717913,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 533.0,
+            "forecast": 605.1664841931605,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 537.0,
+            "forecast": 516.2529399069923,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 354.0,
+            "forecast": 386.9995187812814,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 236.0,
+            "forecast": 237.24627370300095,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 149.0,
+            "forecast": 210.4245643936597,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 421.0,
+            "forecast": 394.7326559502425,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 509.0,
+            "forecast": 507.25899185734033,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 416.0,
+            "forecast": 439.78773802747173,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 238.0,
+            "forecast": 358.88526977772835,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 174.0,
+            "forecast": 202.13562915734565,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 180.0,
+            "forecast": 194.57251686160635,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "8",
+        "stationLabel": "Pasing"
+      },
+      {
+        "bias": 28.83591675008798,
+        "rmse": 142.56615932201592,
+        "sampleCount": 42,
+        "series": [
+          {
+            "actual": 1029.0,
+            "forecast": 948.706537329633,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 1331.0,
+            "forecast": 1380.8497390559485,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 1600.0,
+            "forecast": 1496.522916225267,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 1432.0,
+            "forecast": 1471.5871791319378,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 1129.0,
+            "forecast": 1036.5756001224497,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 825.0,
+            "forecast": 834.3654250167076,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 860.0,
+            "forecast": 984.5993570456719,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 1265.0,
+            "forecast": 1492.913336171467,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 2012.0,
+            "forecast": 1708.60048731996,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 1244.0,
+            "forecast": 1577.2549048839353,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 1214.0,
+            "forecast": 1285.6848899783492,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 789.0,
+            "forecast": 867.497709328986,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 361.0,
+            "forecast": 674.6879857481315,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 939.0,
+            "forecast": 1070.335958460329,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 1146.0,
+            "forecast": 1197.2480381054274,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 1196.0,
+            "forecast": 1038.4807647156244,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 937.0,
+            "forecast": 798.3032405635241,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 677.0,
+            "forecast": 629.8397145018417,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 958.0,
+            "forecast": 1050.129686468642,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 1437.0,
+            "forecast": 1629.8231348479462,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 2026.0,
+            "forecast": 1868.6742464793767,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 1716.0,
+            "forecast": 1639.170584518974,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 1322.0,
+            "forecast": 1301.4705697590302,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 1010.0,
+            "forecast": 977.4654277588011,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 480.0,
+            "forecast": 552.4982970242344,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 950.0,
+            "forecast": 924.9865354940234,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 747.0,
+            "forecast": 943.8461367279433,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 1018.0,
+            "forecast": 866.0443248049364,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 640.0,
+            "forecast": 732.0711581475691,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 593.0,
+            "forecast": 451.48545030217076,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 194.0,
+            "forecast": 573.3599371193162,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 866.0,
+            "forecast": 797.3063314620539,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": 981.0,
+            "forecast": 993.2422293457189,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 939.0,
+            "forecast": 900.5315324408413,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 527.0,
+            "forecast": 669.2555737558812,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 539.0,
+            "forecast": 467.2975066376184,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 947.0,
+            "forecast": 942.8247862552164,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 1376.0,
+            "forecast": 1366.2278048198705,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 1499.0,
+            "forecast": 1595.8084667374367,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 1384.0,
+            "forecast": 1429.111010106088,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 1043.0,
+            "forecast": 1125.4519772131566,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 765.0,
+            "forecast": 861.972011571658,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "9",
+        "stationLabel": "Muenchner Freiheit"
+      },
+      {
+        "bias": 40.3084983219242,
+        "rmse": 366.38195370974523,
+        "sampleCount": 41,
+        "series": [
+          {
+            "actual": 2403.0,
+            "forecast": 2493.9745904784695,
+            "hour": 7,
+            "leadHours": 19.0,
+            "timestamp": "2026-01-27T06:00:00+00:00"
+          },
+          {
+            "actual": 3540.0,
+            "forecast": 3509.3231425615168,
+            "hour": 8,
+            "leadHours": 20.0,
+            "timestamp": "2026-01-27T07:00:00+00:00"
+          },
+          {
+            "actual": 4055.0,
+            "forecast": 4482.829995863511,
+            "hour": 9,
+            "leadHours": 21.0,
+            "timestamp": "2026-01-27T08:00:00+00:00"
+          },
+          {
+            "actual": 3330.0,
+            "forecast": 3830.705799615129,
+            "hour": 10,
+            "leadHours": 22.0,
+            "timestamp": "2026-01-27T09:00:00+00:00"
+          },
+          {
+            "actual": 3615.0,
+            "forecast": 2748.9113453889595,
+            "hour": 11,
+            "leadHours": 23.0,
+            "timestamp": "2026-01-27T10:00:00+00:00"
+          },
+          {
+            "actual": 2138.0,
+            "forecast": 2472.1703234887755,
+            "hour": 12,
+            "leadHours": 24.0,
+            "timestamp": "2026-01-27T11:00:00+00:00"
+          },
+          {
+            "actual": 2075.0,
+            "forecast": 2652.335717921618,
+            "hour": 7,
+            "leadHours": 43.0,
+            "timestamp": "2026-01-28T06:00:00+00:00"
+          },
+          {
+            "actual": 3870.0,
+            "forecast": 3849.3767235847868,
+            "hour": 8,
+            "leadHours": 44.0,
+            "timestamp": "2026-01-28T07:00:00+00:00"
+          },
+          {
+            "actual": 5309.0,
+            "forecast": 4642.640636744849,
+            "hour": 9,
+            "leadHours": 45.0,
+            "timestamp": "2026-01-28T08:00:00+00:00"
+          },
+          {
+            "actual": 4096.0,
+            "forecast": 4670.875632585203,
+            "hour": 10,
+            "leadHours": 46.0,
+            "timestamp": "2026-01-28T09:00:00+00:00"
+          },
+          {
+            "actual": 3563.0,
+            "forecast": 3195.458157594257,
+            "hour": 11,
+            "leadHours": 47.0,
+            "timestamp": "2026-01-28T10:00:00+00:00"
+          },
+          {
+            "actual": 2880.0,
+            "forecast": 2907.1157428529546,
+            "hour": 12,
+            "leadHours": 48.0,
+            "timestamp": "2026-01-28T11:00:00+00:00"
+          },
+          {
+            "actual": 1938.0,
+            "forecast": 1602.9934796139146,
+            "hour": 7,
+            "leadHours": 67.0,
+            "timestamp": "2026-01-29T06:00:00+00:00"
+          },
+          {
+            "actual": 2289.0,
+            "forecast": 2523.5038239070686,
+            "hour": 8,
+            "leadHours": 68.0,
+            "timestamp": "2026-01-29T07:00:00+00:00"
+          },
+          {
+            "actual": 2555.0,
+            "forecast": 3101.229598042163,
+            "hour": 9,
+            "leadHours": 69.0,
+            "timestamp": "2026-01-29T08:00:00+00:00"
+          },
+          {
+            "actual": 3062.0,
+            "forecast": 2619.3727242673585,
+            "hour": 10,
+            "leadHours": 70.0,
+            "timestamp": "2026-01-29T09:00:00+00:00"
+          },
+          {
+            "actual": 2250.0,
+            "forecast": 2134.6149490477683,
+            "hour": 11,
+            "leadHours": 71.0,
+            "timestamp": "2026-01-29T10:00:00+00:00"
+          },
+          {
+            "actual": 1379.0,
+            "forecast": 1624.5721442916438,
+            "hour": 12,
+            "leadHours": 72.0,
+            "timestamp": "2026-01-29T11:00:00+00:00"
+          },
+          {
+            "actual": 2262.0,
+            "forecast": 2398.79057025808,
+            "hour": 7,
+            "leadHours": 91.0,
+            "timestamp": "2026-01-30T06:00:00+00:00"
+          },
+          {
+            "actual": 3324.0,
+            "forecast": 3118.3459535984985,
+            "hour": 8,
+            "leadHours": 92.0,
+            "timestamp": "2026-01-30T07:00:00+00:00"
+          },
+          {
+            "actual": 4134.0,
+            "forecast": 4074.3611130057725,
+            "hour": 9,
+            "leadHours": 93.0,
+            "timestamp": "2026-01-30T08:00:00+00:00"
+          },
+          {
+            "actual": 3624.0,
+            "forecast": 3757.0109574027833,
+            "hour": 10,
+            "leadHours": 94.0,
+            "timestamp": "2026-01-30T09:00:00+00:00"
+          },
+          {
+            "actual": 3168.0,
+            "forecast": 2914.0361425021074,
+            "hour": 11,
+            "leadHours": 95.0,
+            "timestamp": "2026-01-30T10:00:00+00:00"
+          },
+          {
+            "actual": 1664.0,
+            "forecast": 2231.786487599736,
+            "hour": 12,
+            "leadHours": 96.0,
+            "timestamp": "2026-01-30T11:00:00+00:00"
+          },
+          {
+            "actual": 855.0,
+            "forecast": 1489.0962591104328,
+            "hour": 7,
+            "leadHours": 115.0,
+            "timestamp": "2026-01-31T06:00:00+00:00"
+          },
+          {
+            "actual": 2322.0,
+            "forecast": 2103.8033902947222,
+            "hour": 8,
+            "leadHours": 116.0,
+            "timestamp": "2026-01-31T07:00:00+00:00"
+          },
+          {
+            "actual": 2739.0,
+            "forecast": 2434.210008434946,
+            "hour": 9,
+            "leadHours": 117.0,
+            "timestamp": "2026-01-31T08:00:00+00:00"
+          },
+          {
+            "actual": 2122.0,
+            "forecast": 2353.8515493994537,
+            "hour": 10,
+            "leadHours": 118.0,
+            "timestamp": "2026-01-31T09:00:00+00:00"
+          },
+          {
+            "actual": 1281.0,
+            "forecast": 1696.4961338328144,
+            "hour": 11,
+            "leadHours": 119.0,
+            "timestamp": "2026-01-31T10:00:00+00:00"
+          },
+          {
+            "actual": 1324.0,
+            "forecast": 1429.5285725322904,
+            "hour": 12,
+            "leadHours": 120.0,
+            "timestamp": "2026-01-31T11:00:00+00:00"
+          },
+          {
+            "actual": 1586.0,
+            "forecast": 1590.4673387449825,
+            "hour": 7,
+            "leadHours": 139.0,
+            "timestamp": "2026-02-01T06:00:00+00:00"
+          },
+          {
+            "actual": 2561.0,
+            "forecast": 2293.830081948802,
+            "hour": 8,
+            "leadHours": 140.0,
+            "timestamp": "2026-02-01T07:00:00+00:00"
+          },
+          {
+            "actual": null,
+            "forecast": 2631.857687745087,
+            "hour": 9,
+            "leadHours": 141.0,
+            "timestamp": "2026-02-01T08:00:00+00:00"
+          },
+          {
+            "actual": 2617.0,
+            "forecast": 2895.511511892185,
+            "hour": 10,
+            "leadHours": 142.0,
+            "timestamp": "2026-02-01T09:00:00+00:00"
+          },
+          {
+            "actual": 2630.0,
+            "forecast": 1944.901598092361,
+            "hour": 11,
+            "leadHours": 143.0,
+            "timestamp": "2026-02-01T10:00:00+00:00"
+          },
+          {
+            "actual": 1421.0,
+            "forecast": 1449.5860122480199,
+            "hour": 12,
+            "leadHours": 144.0,
+            "timestamp": "2026-02-01T11:00:00+00:00"
+          },
+          {
+            "actual": 1921.0,
+            "forecast": 2269.615260368271,
+            "hour": 7,
+            "leadHours": 163.0,
+            "timestamp": "2026-02-02T06:00:00+00:00"
+          },
+          {
+            "actual": 3120.0,
+            "forecast": 3178.587116908886,
+            "hour": 8,
+            "leadHours": 164.0,
+            "timestamp": "2026-02-02T07:00:00+00:00"
+          },
+          {
+            "actual": 3641.0,
+            "forecast": 3612.5660911630875,
+            "hour": 9,
+            "leadHours": 165.0,
+            "timestamp": "2026-02-02T08:00:00+00:00"
+          },
+          {
+            "actual": 3689.0,
+            "forecast": 3424.834136083782,
+            "hour": 10,
+            "leadHours": 166.0,
+            "timestamp": "2026-02-02T09:00:00+00:00"
+          },
+          {
+            "actual": 2588.0,
+            "forecast": 2487.709041876531,
+            "hour": 11,
+            "leadHours": 167.0,
+            "timestamp": "2026-02-02T10:00:00+00:00"
+          },
+          {
+            "actual": 1781.0,
+            "forecast": 2162.7185760504008,
+            "hour": 12,
+            "leadHours": 168.0,
+            "timestamp": "2026-02-02T11:00:00+00:00"
+          }
+        ],
+        "stationId": "10",
+        "stationLabel": "Odeonsplatz"
+      }
+    ],
+    "status": "verified"
+  },
+  "fixedFacts": {
+    "evaluationOrigin": "2026-01-26T12:00:00+01:00",
+    "horizonDays": 7,
+    "missingTestLabels": 3,
+    "scoreableRows": 417,
+    "sensorCount": 5,
+    "serviceHours": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "stationCount": 10,
+    "targetEndDate": "2026-02-02",
+    "targetRows": 67740,
+    "targetStartDate": "2023-01-01",
+    "testRows": 420,
+    "trainRows": 67320
+  },
+  "generatedAt": "2026-08-08T18:13:49.779670+00:00",
+  "governance": [
+    "Aggregate operational decision support\u2014not a safety controller or an individual employee decision system.",
+    "Managed identities and Key Vault keep credentials out of code and logs.",
+    "Human approval is required for model promotion; one holdout cannot auto-promote a champion.",
+    "Privacy and AI-risk classification must be revisited if individual mobility, worker decisions, or safety-critical automation enter scope."
+  ],
+  "nonFinal": false,
+  "operations": {
+    "cadence": "hourly versioned refresh",
+    "failureModes": [
+      {
+        "action": "Block publication; retain last successful batch",
+        "state": "blocked",
+        "trigger": "Target or station-metadata contract failure"
+      },
+      {
+        "action": "Publish complete seasonal fallback batch",
+        "state": "degraded",
+        "trigger": "Weather or traffic unavailable"
+      },
+      {
+        "action": "Fail closed to declared fallback; alert owner",
+        "state": "degraded",
+        "trigger": "Champion artifact corrupt or incompatible"
+      },
+      {
+        "action": "Reject batch before atomic publication",
+        "state": "blocked",
+        "trigger": "Partial or non-finite forecast"
+      }
+    ],
+    "fallback": "Seven-day seasonal naive, then cutoff-safe station \u00d7 weekday \u00d7 hour median",
+    "monitoring": [
+      "freshness",
+      "completeness",
+      "overall RMSE",
+      "per-station RMSE",
+      "bias",
+      "champion vs baseline",
+      "drift"
+    ],
+    "publishPolicy": "Publish atomically only after all 420 records pass schema, finiteness, and completeness checks.",
+    "recordCount": 420
+  },
+  "schemaVersion": 1,
+  "sourceRevision": "f5c5c65ed273231f11b4d931efbca08f27895fcc",
+  "sources": [
+    {
+      "label": "Authoritative task",
+      "reference": "2026_OMMAX_DAI_CaseStudy_DataScience_GenAI.pdf"
+    },
+    {
+      "label": "Implementation contract",
+      "reference": "partA_passenger_forecasting/TASK_A_IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "label": "TabPFN v2",
+      "reference": "Nature 2025 paper; PriorLabs/TabPFN; PriorLabs/tabpfn-time-series"
+    }
+  ],
+  "status": "verified",
+  "tabpfn": {
+    "disposition": "skipped_resource_and_fit_gate",
+    "host": "8 CPU cores \u00b7 15 GiB RAM \u00b7 no GPU",
+    "labeledTrainingRows": 66858,
+    "laterGate": "Approved GPU or explicit egress approval; pinned v2 weights; telemetry disabled; 4,096-step context; identical rolling-origin protocol.",
+    "reasons": [
+      "Direct v2 evidence centered on datasets up to 10,000 rows.",
+      "The configured host does not meet the preferred GPU execution path.",
+      "TabPFN-TS drops the static and past-only covariates this use case depends on."
+    ]
+  }
+}

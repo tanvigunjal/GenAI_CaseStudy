@@ -6,12 +6,12 @@ Submission for the OMMAX Data Science / GenAI case study (`2026_OMMAX_DAI_CaseSt
 
 [`partA_passenger_forecasting/`](partA_passenger_forecasting/)
 
-A point-in-time-safe, hourly batch forecasting package for Munich station passenger volumes. Predicts the next seven complete service dates (07:00-12:00) for ten stations, with a remote training pipeline, evaluation evidence, and an offline HTML presentation of the results.
+An hourly batch forecasting for Munich station passenger volumes. Designed to avoid using information that wouldn’t have been available at prediction time. It forecasts passenger numbers for the next seven dates, from 07:00–12:00, across ten stations. 
 
 ## Part B — Agentic Workflow
 
 [`partB_agentic_workflow/`](partB_agentic_workflow/)
 
-A controlled email-to-ERP order workflow: an LLM proposes structured order data from inbound email, but a deterministic policy layer owns the write boundary. Includes the Python package, an executable notebook walkthrough, and a 14-scene offline HTML presentation.
+A controlled email-to-ERP ordering workflow where an LLM turns incoming unstructured emails into structured order data. While a deterministic policy layer controls what actually gets written to the ERP system. 
 
 Each part has its own `README.md` with setup and run instructions.

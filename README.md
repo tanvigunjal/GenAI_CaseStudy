@@ -1,7 +1,5 @@
 # Data Science / GenAI Case Study
 
-Submission for a Data Science / GenAI case study, split into two independent deliverables.
-
 ## Part A — Passenger Forecasting
 
 [`partA_passenger_forecasting/`](partA_passenger_forecasting/)

@@ -1,6 +1,6 @@
 # Controlled email-to-ERP workflow
 
-OMMAX case study, Part B. This is a locally runnable, production-shaped slice of an email-to-ERP pipeline, with the model kept behind a deterministic authorization boundary. It can propose actions, but it never gets to execute them on its own.
+Data Science / GenAI case study, Part B. This is a locally runnable, production-shaped slice of an email-to-ERP pipeline, with the model kept behind a deterministic authorization boundary. It can propose actions, but it never gets to execute them on its own.
 
 By default everything runs offline: no API keys, no network calls, just deterministic replay in shadow mode. An optional Gemini adapter is available for shadow checks against synthetic data, and even then, automatic writes are limited to a local REST ERP sandbox.
 
@@ -11,14 +11,12 @@ By default everything runs offline: no API keys, no network calls, just determin
 | `order_to_erp_agent.ipynb` | Executable first-person walkthrough and evidence run |
 | `src/order_pipeline/` | Strict contracts, safe ingestion, controlled extraction, policy, state, audit, review, and ERP sandbox |
 | `tests/` | Golden, adversarial, state, audit, attachment, REST, idempotency, and review controls |
-| `presentation/dist/ommax_part_b.html` | Self-contained 14-scene executive/technical presentation |
+| `presentation/dist/part_b.html` | Self-contained 14-scene executive/technical presentation |
 | `presentation_evidence.json` | Sanitized evidence manifest generated from the replay run |
 | `ARCHITECTURE.md` | Code-level control flow and trust boundaries |
 | `docs/THREAT_MODEL.md` | Threat/control/test mapping and residual risks |
 | `docs/OPERATIONS_AND_COMPLIANCE.md` | Deployment, monitoring, GDPR/EU, and runbook posture |
 
-
-The case-study PDF is included at the repository root.
 
 ## Setup
 
@@ -87,7 +85,7 @@ npm run build
 npm run test:e2e
 ```
 
-The build produces a single file, `dist/ommax_part_b.html`.
+The build produces a single file, `dist/part_b.html`.
 
 ## Scope and claims
 

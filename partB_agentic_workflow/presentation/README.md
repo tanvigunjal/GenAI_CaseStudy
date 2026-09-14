@@ -35,7 +35,7 @@ claims object includes `coreScenes: 14` and `promotionSampleFloor: 299`.
 `.github/workflows/pages.yml` publishes the checked-in self-contained
 artifact as the site root whenever the presentation is pushed, or when the
 workflow is started manually. For this repository, the expected Pages address
-is `https://tanvigunjal.github.io/OMMAX_CaseStudy/`. The deployment must be
+is `https://tanvigunjal.github.io/GenAI_CaseStudy/`. The deployment must be
 verified before that address is presented as live.
 
 ## Presenter controls

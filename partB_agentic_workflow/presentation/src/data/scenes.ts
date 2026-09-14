@@ -10,7 +10,7 @@ export interface SceneMeta {
 export const scenes: SceneMeta[] = [
   {
     id: "scene-1",
-    eyebrow: "OMMAX · Data Science / GenAI case study",
+    eyebrow: "Data Science / GenAI case study",
     title: "A controlled path from inbox to ERP, not an autonomous shortcut.",
     timing: "0:55",
     notes: [

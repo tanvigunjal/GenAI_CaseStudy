@@ -32,7 +32,7 @@ def derive_idempotency_key(mailbox_id: str, provider_message_id: str) -> str:
 
     material = _canonical_json(
         {
-            "domain": "ommax-email-order-idempotency-v1",
+            "domain": "order-idempotency-v1",
             "mailbox_id": mailbox_id,
             "provider_message_id": provider_message_id,
         }

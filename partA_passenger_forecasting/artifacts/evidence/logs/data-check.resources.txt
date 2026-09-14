@@ -1,4 +1,4 @@
-	Command being timed: "/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/tools/uv/uv run forecast data-check --config /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/config/hetzner_prod.toml --data-dir /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/data/raw --output-dir /home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work"
+	Command being timed: "/home/deploy/task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/tools/uv/uv run forecast data-check --config /home/deploy/task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/code/config/hetzner_prod.toml --data-dir /home/deploy/task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/data/raw --output-dir /home/deploy/task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work"
 	User time (seconds): 6.68
 	System time (seconds): 1.07
 	Percent of CPU this job got: 118%

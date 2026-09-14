@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import ommaxLogo from "./assets/ommax-logo.png";
 import { scenes, totalRehearsalSeconds } from "./data/scenes";
 import {
   baselineLiftPercent,
@@ -198,12 +197,11 @@ function App() {
       case 0:
         return (
           <div className="cover-layout">
-            <img src={ommaxLogo} className="brand-logo cover-logo" alt="OMMAX" />
             <div className="cover-rule" aria-hidden="true" />
             <p className="cover-kicker">Passenger forecasting · Munich operations</p>
             <h1>{scenes[0].title}</h1>
             <div className="cover-footer">
-              <p><strong>Tanvi Gunjal</strong><span>OMMAX · Part A</span></p>
+              <p><strong>Tanvi Gunjal</strong><span>Part A</span></p>
               <p><span>7-day horizon</span><strong>10 stations · 420 decisions</strong></p>
             </div>
           </div>
@@ -457,7 +455,6 @@ function App() {
                   </>
                 )}
               </div>
-              <img src={ommaxLogo} className="brand-logo header-logo" alt="OMMAX" />
             </header>
           )}
           <div className="scene-content">{sceneContent}</div>

@@ -10,14 +10,14 @@ export interface SceneDefinition {
 export const scenes: SceneDefinition[] = [
   {
     id: "scene-1",
-    eyebrow: "OMMAX · Data Science Case Study",
+    eyebrow: "Data Science Case Study",
     title: "Classic ML: From Passenger Forecasts To Operational Decisions",
     timing: "00:40",
     notes: [
       "I treated this as an operational decision system, not a leaderboard exercise.",
       "I will show the forecast contract, the leakage controls, the model gate, the evidence, and the pilot decision I recommend.",
     ],
-    sources: ["OMMAX case-study PDF, Part A", "Verified evaluation manifest when status=verified"],
+    sources: ["Case-study brief, Part A", "Verified evaluation manifest when status=verified"],
   },
   {
     id: "scene-2",
@@ -39,7 +39,7 @@ export const scenes: SceneDefinition[] = [
       "Three years and ten stations sound simple until traffic arrives as five coordinate-only sensors and the targets include gaps.",
       "I map each station to a stable nearest sensor, preserve the mapping distance, lag passenger and traffic history, and never treat station capacity as a ceiling.",
     ],
-    sources: ["Presentation evidence: datasets, fixedFacts, dataQuality", "OMMAX supplied CSV inventory"],
+    sources: ["Presentation evidence: datasets, fixedFacts, dataQuality", "Supplied CSV inventory"],
   },
   {
     id: "scene-4",

@@ -23,7 +23,7 @@ cells = [
         """
         # I built a controlled path from a shared order inbox to ERP
 
-        **OMMAX case study · Part B · Tanvi Gunjal**
+        **Data Science / GenAI case study · Part B · Tanvi Gunjal**
 
         ## 1. Objective and acceptance contract
 

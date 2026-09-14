@@ -1,5 +1,5 @@
-raw_data_dir = "/home/deploy/ommax-task-a/data/raw"
-output_dir = "/home/deploy/ommax-task-a/work"
+raw_data_dir = "/home/deploy/task-a/data/raw"
+output_dir = "/home/deploy/task-a/work"
 timezone = "Europe/Berlin"
 log_level = "INFO"
 horizon_days = 7

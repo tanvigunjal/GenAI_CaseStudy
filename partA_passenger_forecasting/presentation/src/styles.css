@@ -41,8 +41,6 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .scene-header p { margin: 0 0 .8cqw; color: var(--neon); font-size: 1.02cqw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .scene-header h2 { max-width: 72cqw; margin: 0; color: inherit; font-size: 3.25cqw; line-height: .99; letter-spacing: -.052em; }
 .scene-header-index { color: var(--neon); }
-.brand-logo { display: block; width: auto; object-fit: contain; object-position: center; }
-.header-logo { width: 10.6cqw; height: 4.4cqw; flex: 0 0 auto; border-radius: .25cqw; background: rgba(255,255,255,.92); padding: .45cqw .65cqw; }
 .provenance { position: absolute; right: 0; bottom: 0; border-left: .35cqw solid var(--aqua); padding: .25cqw .7cqw; color: inherit; font-size: .72cqw; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 
 .deck-nav { position: absolute; z-index: 20; left: 2.8cqw; right: 2.8cqw; bottom: 1.4cqw; height: 2.5cqw; display: flex; align-items: center; gap: .55cqw; border-top: 1px solid rgba(40,45,53,.28); padding-top: .85cqw; }
@@ -70,7 +68,6 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .scene-theme-1 .scene { display: block; padding: 5.2cqw 6.4cqw; }
 .scene-theme-1 .scene-content { height: 100%; }
 .cover-layout { height: 100%; position: relative; display: flex; flex-direction: column; justify-content: center; }
-.cover-logo { position: absolute; left: 0; top: 0; width: 13.7cqw; height: 5.7cqw; }
 .cover-rule { position: absolute; right: -14cqw; top: -5.2cqw; width: 35cqw; height: 100cqw; transform: rotate(16deg); background: var(--aqua); opacity: .92; }
 .cover-rule::after { content: ""; position: absolute; left: -3cqw; top: 0; width: .8cqw; height: 100%; background: var(--neon); }
 .cover-kicker { position: relative; z-index: 1; margin: 0 0 1.5cqw; color: var(--neon); font-size: .95cqw; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }

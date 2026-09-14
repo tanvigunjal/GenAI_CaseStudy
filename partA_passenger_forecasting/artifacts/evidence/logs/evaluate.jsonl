@@ -1,3 +1,3 @@
 {"command": "evaluate", "config_hash": "29fe462d72acc526a154415b00881baaba6dd59ad3d1cb74c34b9effa46c5596", "event": "command_started", "execution_target": "hetzner_prod", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T18:12:26.531116+00:00"}
-{"coverage": "417/420", "evaluation_manifest": "/home/deploy/ommax-task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work/evaluation_manifest.json", "overall_rmse": 273.0886452876618, "status": "verified"}
+{"coverage": "417/420", "evaluation_manifest": "/home/deploy/task-a/runs/f5c5c65ed273231f11b4d931efbca08f27895fcc/work/evaluation_manifest.json", "overall_rmse": 273.0886452876618, "status": "verified"}
 {"command": "evaluate", "duration_seconds": 2.930508, "event": "command_completed", "level": "INFO", "logger": "passenger_forecast.cli", "timestamp": "2026-08-08T18:12:29.461580+00:00"}

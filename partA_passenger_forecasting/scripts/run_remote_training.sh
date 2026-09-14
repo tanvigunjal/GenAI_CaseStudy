@@ -19,7 +19,7 @@ REPOSITORY_ROOT="$(git rev-parse --show-toplevel)"
 PROJECT_ROOT="${REPOSITORY_ROOT}/partA_passenger_forecasting"
 PROJECT_RELATIVE="partA_passenger_forecasting"
 RAW_DATA_DIR="${RAW_DATA_DIR:-${PROJECT_ROOT}/data/raw}"
-REMOTE_RUN="/home/deploy/ommax-task-a/runs/${SOURCE_SHA}"
+REMOTE_RUN="/home/deploy/task-a/runs/${SOURCE_SHA}"
 
 if [[ "$(git -C "${REPOSITORY_ROOT}" rev-parse HEAD)" != "${SOURCE_SHA}" ]]; then
   echo "check out the requested source revision before copying it" >&2

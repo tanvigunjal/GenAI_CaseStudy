@@ -249,7 +249,7 @@ function App() {
             <div className="cover-footer">
               <p>
                 <strong>Tanvi Gunjal</strong>
-                <span>OMMAX · Part B</span>
+                <span>Part B</span>
               </p>
               <p className="cover-scope">
                 Offline-first prototype<br />Synthetic data only
@@ -643,7 +643,7 @@ function App() {
               <p><span>02</span><strong>Which risk gate authorizes the first bounded write path?</strong></p>
               <p><span>03</span><strong>Which operating baseline makes the value case real?</strong></p>
             </div>
-            <div className="closing-signoff">Tanvi Gunjal · OMMAX Part B</div>
+            <div className="closing-signoff">Tanvi Gunjal · Part B</div>
           </div>
         );
       default:

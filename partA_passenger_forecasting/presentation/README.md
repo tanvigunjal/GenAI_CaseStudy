@@ -1,4 +1,4 @@
-# OMMAX Part A presentation
+# Part A presentation
 
 Seven core scenes plus eight appendix sections, implemented in React 19,
 TypeScript, Vite, and `vite-plugin-singlefile`.
@@ -11,8 +11,8 @@ npm run build
 npm run verify:artifact
 ```
 
-The build emits exactly `dist/ommax_part_a.html`. JavaScript, CSS, the supplied
-OMMAX logo, Inter font files, and the evidence manifest are bundled in that file.
+The build emits exactly `dist/part_a.html`. JavaScript, CSS, Inter font
+files, and the evidence manifest are bundled in that file.
 The presentation performs no runtime network requests.
 
 ## Evidence handoff

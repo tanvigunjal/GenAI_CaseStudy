@@ -15,7 +15,7 @@ if [[ ! "${REMOTE_HOST}" =~ ^[A-Za-z0-9_.-]+$ ]]; then
   exit 2
 fi
 
-REMOTE_RUN="/home/deploy/ommax-task-a/runs/${SOURCE_SHA}"
+REMOTE_RUN="/home/deploy/task-a/runs/${SOURCE_SHA}"
 mkdir -p "${DESTINATION}"
 rsync -az \
   --exclude '.venv/' \

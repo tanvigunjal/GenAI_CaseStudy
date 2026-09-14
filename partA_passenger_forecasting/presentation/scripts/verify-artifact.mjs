@@ -4,12 +4,12 @@ import { fileURLToPath } from "node:url";
 
 const presentationDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(presentationDir, "dist");
-const artifactPath = path.join(distDir, "ommax_part_a.html");
+const artifactPath = path.join(distDir, "part_a.html");
 
 if (!existsSync(artifactPath)) throw new Error("Build artifact is missing.");
 const outputs = readdirSync(distDir).filter((name) => !name.startsWith("."));
-if (outputs.length !== 1 || outputs[0] !== "ommax_part_a.html") {
-  throw new Error(`Expected exactly dist/ommax_part_a.html; found: ${outputs.join(", ")}`);
+if (outputs.length !== 1 || outputs[0] !== "part_a.html") {
+  throw new Error(`Expected exactly dist/part_a.html; found: ${outputs.join(", ")}`);
 }
 
 const html = readFileSync(artifactPath, "utf8");

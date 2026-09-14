@@ -15,13 +15,13 @@ export default defineConfig({
     react(),
     viteSingleFile(),
     {
-      name: "ommax-part-a-html-filename",
+      name: "part-a-html-filename",
       enforce: "post",
       generateBundle(_options, bundle) {
         const html = bundle["index.html"];
         if (!html) throw new Error("Vite did not emit index.html.");
-        html.fileName = "ommax_part_a.html";
-        bundle["ommax_part_a.html"] = html;
+        html.fileName = "part_a.html";
+        bundle["part_a.html"] = html;
         delete bundle["index.html"];
       },
     },

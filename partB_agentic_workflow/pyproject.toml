@@ -3,9 +3,9 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ommax-order-workflow"
+name = "order-workflow"
 version = "0.1.0"
-description = "Controlled, offline-first email-to-ERP workflow for the OMMAX case study"
+description = "Controlled, offline-first email-to-ERP workflow for a Data Science / GenAI case study"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [

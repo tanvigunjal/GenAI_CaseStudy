@@ -5,14 +5,14 @@ import path from "node:path";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const presentationDir = path.resolve(scriptDir, "..");
 const distDir = path.join(presentationDir, "dist");
-const artifactPath = path.join(distDir, "ommax_part_b.html");
+const artifactPath = path.join(distDir, "part_b.html");
 
 if (!existsSync(artifactPath)) {
   throw new Error("Build artifact is missing. Run npm run build first.");
 }
 
 const outputs = readdirSync(distDir).filter((name) => !name.startsWith("."));
-if (outputs.length !== 1 || outputs[0] !== "ommax_part_b.html") {
+if (outputs.length !== 1 || outputs[0] !== "part_b.html") {
   throw new Error(`Expected one self-contained HTML file; found: ${outputs.join(", ")}`);
 }
 

@@ -9,7 +9,7 @@ partA_passenger_forecasting/artifacts/runtime/
 partA_passenger_forecasting/tuning/
 partA_passenger_forecasting/.env
 partA_passenger_forecasting/presentation/dist/*
-!partA_passenger_forecasting/presentation/dist/ommax_part_a.html
+!partA_passenger_forecasting/presentation/dist/part_a.html
 
 # Python
 __pycache__/

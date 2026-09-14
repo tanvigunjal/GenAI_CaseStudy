@@ -1,4 +1,4 @@
-# OMMAX Part A - Passenger Forecasting
+# Part A - Passenger Forecasting
 
 This directory holds the Part A deliverable: a point-in-time-safe, hourly batch
 forecasting package and an evidence-driven offline HTML presentation. It
@@ -29,7 +29,7 @@ paths, and configuration errors or failed contracts exit non-zero.
 ## Commands
 
 ```bash
-DATA=/absolute/path/to/ommax-task-a-dataset
+DATA=/absolute/path/to/task-a-dataset
 uv run forecast data-check --config config/default.toml --data-dir "$DATA" --output-dir workspace/audit
 uv run forecast backtest --config config/hetzner_prod.toml --data-dir "$DATA" --output-dir workspace/run
 uv run forecast train --config config/hetzner_prod.toml --data-dir "$DATA" --output-dir workspace/run
@@ -59,14 +59,14 @@ cd presentation && npm ci && npm test && npm run build
 ```
 
 The presentation build outputs a single file,
-`presentation/dist/ommax_part_a.html`.
+`presentation/dist/part_a.html`.
 
 ## Remote full-data run
 
 Full validation, bounded tuning, champion refit, and the official evaluation
 run only happen on the configured eight-core `hetzner_prod` host. The source
 revision is committed and pushed before execution starts. A versioned
-directory is created under `/home//ommax-task-a/runs/<source-sha>/`; code and
+directory is created under `/home//task-a/runs/<source-sha>/`; code and
 the four raw CSVs are sent over with non-destructive `rsync`, checksums are
 verified remotely, and a pinned user-local `uv` handles the run without
 touching system Python. See
@@ -80,7 +80,7 @@ the full procedure.
 - Immutable evaluation evidence and artifact digests under `artifacts/evidence/`
 - Compact champion artifact and versioned feature schema under `artifacts/model/`
 - Tested offline executive presentation at
-  `presentation/dist/ommax_part_a.html`
+  `presentation/dist/part_a.html`
 
 This system is built for aggregate operational planning. It's not an online
 serving API, a safety controller, an individual employee decision system, a

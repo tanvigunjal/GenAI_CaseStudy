@@ -1,6 +1,6 @@
-# OMMAX Case Study
+# Data Science / GenAI Case Study
 
-Submission for the OMMAX Data Science / GenAI case study (`2026_OMMAX_DAI_CaseStudy_DataScience_GenAI.pdf`), split into two independent deliverables.
+Submission for a Data Science / GenAI case study, split into two independent deliverables.
 
 ## Part A — Passenger Forecasting
 
